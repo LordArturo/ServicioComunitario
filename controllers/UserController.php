@@ -9,7 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,7 +31,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post', 'get'],
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -121,35 +121,5 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
-    }
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionMision()
-    {
-        return $this->render('index');
-    }
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionVision()
-    {
-        return $this->render('index');
-    }
-    
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionContacto()
-    {
-        return $this->render('index');
     }
 }
