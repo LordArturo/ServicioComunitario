@@ -3,12 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Planilla;
-use app\models\Vivienda;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+
+use app\models\Planilla;
+use app\models\Vivienda;
+use app\models\PersonaPlanilla;
+use app\models\Persona;
 
 /**
  * PlanillaController implements the CRUD actions for Planilla model.
@@ -66,17 +70,30 @@ class PlanillaController extends Controller
     {
         $model = new Planilla();
         $vivienda = new Vivienda();
+        $personaPlanilla = new PersonaPlanilla();
+        $persona = new Persona();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //vivienda
             $vivienda->load(Yii::$app->request->post());
             $vivienda->save();
             $model->VIVIENDA_COD_VIVIENDA= $vivienda->COD_VIVIENDA;
             $model->save();
+            //persona jefe de familia
+            $persona->load(Yii::$app->request->post());
+            $persona->save();
+            $personaPlanilla->load(Yii::$app->request->post());
+            $personaPlanilla->PLANILLA_ID_PLANILLA = $model->ID_PLANILLA;
+            $personaPlanilla->PERSONA_ID_PERSONA = $persona->ID_PERSONA;
+            $personaPlanilla->JEFE_FAMILIA = 1;
+            $personaPlanilla->save();
             return $this->redirect(['view', 'id' => $model->ID_PLANILLA]);
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'vivienda' => $vivienda,
+                'personaPlanilla' => $personaPlanilla,
+                'persona' => $persona,
             ]);
         }
     }

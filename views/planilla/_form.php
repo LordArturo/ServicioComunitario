@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Censo;
 use app\models\IngresosClasif;
+use app\models\TipoVivienda;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Planilla */
@@ -47,8 +48,20 @@ use app\models\IngresosClasif;
 
     <div>Aquí va la vivienda</div> 
 
-    <?= $form->field($vivienda, 'DESCRIPCION')->textInput(['maxlength' => true]) ?>   
+    <?= $form->field($vivienda, 'DESCRIPCION')->textInput(['maxlength' => true]) ?>  
+    <?= $form->field($vivienda, 'TIPO_VIVIENDA_COD_TIPO_VIVIENDA')->dropDownList(
+            ArrayHelper::map(TipoVivienda::find()->all(),'COD_TIPO_VIVIENDA','DESCRIPCION'),
+            ['prompt'=>'Seleccione Tipo de Vivienda']
+      ) ?> 
 
+    <div>Aquí va el jefe de familia</div> 
+    <?= $form->field($persona, 'NOMBRES')->textInput(['maxlength' => true]) ?> 
+    <?= $form->field($persona, 'APELLIDOS')->textInput(['maxlength' => true]) ?> 
+    <?= $form->field($persona, 'CEDULA')->textInput(['maxlength' => true]) ?> 
+
+    <?= $form->field($personaPlanilla, 'CORREO')->textInput(['maxlength' => true]) ?> 
+    <?= $form->field($personaPlanilla, 'TRABAJA')->textInput(['maxlength' => true]) ?> 
+    <?= $form->field($personaPlanilla, 'INGRESO')->textInput(['maxlength' => true]) ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
@@ -56,3 +69,9 @@ use app\models\IngresosClasif;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+
+<script type="text/javascript">
+    //alert("será");
+</script>

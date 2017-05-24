@@ -36,7 +36,7 @@ class Vivienda extends \yii\db\ActiveRecord
             [['TIPO_VIVIENDA_COD_TIPO_VIVIENDA', 'CALLE_NRO_CALLE'], 'integer'],
             [['DESCRIPCION'], 'string', 'max' => 45],
             //[['CALLE_NRO_CALLE'], 'exist', 'skipOnError' => true, 'targetClass' => Calle::className(), 'targetAttribute' => ['CALLE_NRO_CALLE' => 'NRO_CALLE']],
-            //[['TIPO_VIVIENDA_COD_TIPO_VIVIENDA'], 'exist', 'skipOnError' => true, 'targetClass' => TipoVivienda::className(), 'targetAttribute' => ['TIPO_VIVIENDA_COD_TIPO_VIVIENDA' => 'COD_TIPO_VIVIENDA']],
+            [['TIPO_VIVIENDA_COD_TIPO_VIVIENDA'], 'exist', 'skipOnError' => true, 'targetClass' => TipoVivienda::className(), 'targetAttribute' => ['TIPO_VIVIENDA_COD_TIPO_VIVIENDA' => 'COD_TIPO_VIVIENDA']],
         ];
     }
 
