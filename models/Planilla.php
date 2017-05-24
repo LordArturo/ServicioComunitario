@@ -50,12 +50,12 @@ class Planilla extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NRO_PLANILLA', 'VIVIENDA_COD_VIVIENDA', 'INGRESOS_CLASIF_COD_ING_FAM', 'CENSO_ID_CENSO'], 'required'],
+            [['NRO_PLANILLA', 'INGRESOS_CLASIF_COD_ING_FAM', 'CENSO_ID_CENSO'], 'required'],
             [['NRO_PLANILLA', 'VIVIENDA_COD_VIVIENDA', 'INGRESOS_CLASIF_COD_ING_FAM', 'NUMERO_FAMILIAS', 'OCV', 'CANT_HAB', 'AYUDA', 'CENSO_ID_CENSO'], 'integer'],
             [['FECHA'], 'safe'],
             [['OBSERVACIONES'], 'string', 'max' => 200],
             [['DESCRIPCION_AYUDA'], 'string', 'max' => 150],
-            [['VIVIENDA_COD_VIVIENDA'], 'exist', 'skipOnError' => true, 'targetClass' => Vivienda::className(), 'targetAttribute' => ['VIVIENDA_COD_VIVIENDA' => 'COD_VIVIENDA']],
+            //[['VIVIENDA_COD_VIVIENDA'], 'exist', 'skipOnError' => true, 'targetClass' => Vivienda::className(), 'targetAttribute' => ['VIVIENDA_COD_VIVIENDA' => 'COD_VIVIENDA']],
             [['INGRESOS_CLASIF_COD_ING_FAM'], 'exist', 'skipOnError' => true, 'targetClass' => IngresosClasif::className(), 'targetAttribute' => ['INGRESOS_CLASIF_COD_ING_FAM' => 'COD_ING_FAM']],
             [['CENSO_ID_CENSO'], 'exist', 'skipOnError' => true, 'targetClass' => Censo::className(), 'targetAttribute' => ['CENSO_ID_CENSO' => 'ID_CENSO']],
         ];
@@ -67,17 +67,17 @@ class Planilla extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'NRO_PLANILLA' => 'Nro  Planilla',
+            'NRO_PLANILLA' => 'Nro Planilla',
             'FECHA' => 'Fecha',
             'VIVIENDA_COD_VIVIENDA' => 'Vivienda  Cod  Vivienda',
             'ID_PLANILLA' => 'Id  Planilla',
-            'INGRESOS_CLASIF_COD_ING_FAM' => 'Ingresos  Clasif  Cod  Ing  Fam',
+            'INGRESOS_CLASIF_COD_ING_FAM' => 'Clasificación de ingresos',
             'NUMERO_FAMILIAS' => 'Numero  Familias',
             'OBSERVACIONES' => 'Observaciones',
             'OCV' => 'Ocv',
             'CANT_HAB' => 'Cant  Hab',
             'AYUDA' => 'Ayuda',
-            'DESCRIPCION_AYUDA' => 'Descripcion  Ayuda',
+            'DESCRIPCION_AYUDA' => 'Descripción  Ayuda',
             'CENSO_ID_CENSO' => 'Censo  Id  Censo',
         ];
     }
