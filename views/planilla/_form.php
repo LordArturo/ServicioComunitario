@@ -7,6 +7,10 @@ use yii\helpers\ArrayHelper;
 use app\models\Censo;
 use app\models\IngresosClasif;
 use app\models\TipoVivienda;
+use app\models\Genero;
+use app\models\EstadoCivil;
+use app\models\NivelInstruccion;
+use app\models\Profesion;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Planilla */
@@ -58,8 +62,35 @@ use app\models\TipoVivienda;
     <?= $form->field($persona, 'NOMBRES')->textInput(['maxlength' => true]) ?> 
     <?= $form->field($persona, 'APELLIDOS')->textInput(['maxlength' => true]) ?> 
     <?= $form->field($persona, 'CEDULA')->textInput(['maxlength' => true]) ?> 
+    <?= $form->field($persona, 'FECHA_NACIMIENTO')->textInput(['maxlength' => true]) ?> 
+    <?= $form->field($persona, 'GENERO_COD_GENERO')->dropDownList(
+            ArrayHelper::map(Genero::find()->all(),'COD_GENERO','DESCRIPCION'),
+            ['prompt'=>'Seleccione Sexo']
+      ) ?>
+    <?= $form->field($persona, 'TELEF_CELULAR')->textInput(['maxlength' => true]) ?> 
+    <?= $form->field($persona, 'TELEF_HAB')->textInput(['maxlength' => true]) ?> 
 
     <?= $form->field($personaPlanilla, 'CORREO')->textInput(['maxlength' => true]) ?> 
+    <?= $form->field($personaPlanilla, 'ESTADO_CIVIL_COD_EST_CIV')->dropDownList(
+            ArrayHelper::map(EstadoCivil::find()->all(),'COD_EST_CIV','DESCRIPCION'),
+            ['prompt'=>'Seleccione Estado Civil']
+      ) ?>
+      <!--
+      Pendiente de este código para múltiples modelos
+      --> 
+      <?= $form->field($personaPlanilla, '[0]ESTADO_CIVIL_COD_EST_CIV')->dropDownList(
+            ArrayHelper::map(EstadoCivil::find()->all(),'COD_EST_CIV','DESCRIPCION'),
+            ['prompt'=>'Seleccione Estado Civil']
+      ) ?>
+
+    <?= $form->field($personaPlanilla, 'NIVEL_INSTRUCCION_COD_NIV_INST')->dropDownList(
+            ArrayHelper::map(NivelInstruccion::find()->all(),'COD_NIV_INST','DESCRIPCION'),
+            ['prompt'=>'Seleccione Nivel de Instrucción']
+      ) ?>
+    <?= $form->field($personaPlanilla, 'PROFESION_COD_PROFESION')->dropDownList(
+            ArrayHelper::map(Profesion::find()->all(),'COD_PROFESION','DESCRIPCION'),
+            ['prompt'=>'Seleccione Profesión']
+      ) ?>
     <?= $form->field($personaPlanilla, 'TRABAJA')->textInput(['maxlength' => true]) ?> 
     <?= $form->field($personaPlanilla, 'INGRESO')->textInput(['maxlength' => true]) ?>
     <div class="form-group">

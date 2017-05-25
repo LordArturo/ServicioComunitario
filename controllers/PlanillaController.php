@@ -13,6 +13,7 @@ use app\models\Planilla;
 use app\models\Vivienda;
 use app\models\PersonaPlanilla;
 use app\models\Persona;
+use app\models\Genero;
 
 /**
  * PlanillaController implements the CRUD actions for Planilla model.
@@ -71,6 +72,10 @@ class PlanillaController extends Controller
         $model = new Planilla();
         $vivienda = new Vivienda();
         $personaPlanilla = new PersonaPlanilla();
+        $personaPlanillas = array();
+        for ($i=0; $i < 7; $i++) { 
+             $personaPlanillas[$i] = new PersonaPlanilla();
+         } 
         $persona = new Persona();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -87,6 +92,12 @@ class PlanillaController extends Controller
             $personaPlanilla->PERSONA_ID_PERSONA = $persona->ID_PERSONA;
             $personaPlanilla->JEFE_FAMILIA = 1;
             $personaPlanilla->save();
+            $personaPlanillas[0]->load(Yii::$app->request->post());
+            //Model::validateMultiple($dates)
+            //Model::loadMultiple($personaPlanillas, Yii::$app->request->post());
+            for ($i=0; $i < 1; $i++) { 
+             $personaPlanillas[$i]->save();
+            } 
             return $this->redirect(['view', 'id' => $model->ID_PLANILLA]);
         } else {
             return $this->render('create', [

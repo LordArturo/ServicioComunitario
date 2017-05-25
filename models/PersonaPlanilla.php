@@ -67,7 +67,7 @@ class PersonaPlanilla extends \yii\db\ActiveRecord
             'PLANILLA_ID_PLANILLA' => 'Planilla  Id  Planilla',
             'PERSONA_ID_PERSONA' => 'Persona  Id  Persona',
             'CORREO' => 'Correo',
-            'ESTADO_CIVIL_COD_EST_CIV' => 'Estado  Civil  Cod  Est  Civ',
+            'ESTADO_CIVIL_COD_EST_CIV' => 'Estado Civil',
             'NIVEL_INSTRUCCION_COD_NIV_INST' => 'Nivel  Instruccion  Cod  Niv  Inst',
             'PROFESION_COD_PROFESION' => 'Profesion  Cod  Profesion',
             'TRABAJA' => 'Trabaja',
