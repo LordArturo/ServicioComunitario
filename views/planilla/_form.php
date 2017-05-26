@@ -11,6 +11,7 @@ use app\models\Genero;
 use app\models\EstadoCivil;
 use app\models\NivelInstruccion;
 use app\models\Profesion;
+use app\models\Parentesco;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Planilla */
@@ -75,13 +76,7 @@ use app\models\Profesion;
             ArrayHelper::map(EstadoCivil::find()->all(),'COD_EST_CIV','DESCRIPCION'),
             ['prompt'=>'Seleccione Estado Civil']
       ) ?>
-      <!--
-      Pendiente de este código para múltiples modelos
-      --> 
-      <?= $form->field($personaPlanilla, '[0]ESTADO_CIVIL_COD_EST_CIV')->dropDownList(
-            ArrayHelper::map(EstadoCivil::find()->all(),'COD_EST_CIV','DESCRIPCION'),
-            ['prompt'=>'Seleccione Estado Civil']
-      ) ?>
+      
 
     <?= $form->field($personaPlanilla, 'NIVEL_INSTRUCCION_COD_NIV_INST')->dropDownList(
             ArrayHelper::map(NivelInstruccion::find()->all(),'COD_NIV_INST','DESCRIPCION'),
@@ -93,6 +88,71 @@ use app\models\Profesion;
       ) ?>
     <?= $form->field($personaPlanilla, 'TRABAJA')->textInput(['maxlength' => true]) ?> 
     <?= $form->field($personaPlanilla, 'INGRESO')->textInput(['maxlength' => true]) ?>
+
+    <div>Aquí va el resto de intregrantes de la familia</div> 
+    <!--
+      Pendiente de este código para múltiples modelos
+      --> 
+
+    <table>
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Sexo</th>
+            <th>Cédula</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Parentesco</th>
+            <th>Ingreso</th>
+            <th>Nivel de Instrucción</th>
+            <th>Profesión</th>
+        </tr>
+        <?php for($i=0; $i < 7; $i++) { ?>
+        <tr>
+            <td>
+                <?= $form->field($personas[$i], '['.$i.']NOMBRES')->textInput(['maxlength' => true])->label('') ?>
+            </td>
+            <td>
+                <?= $form->field($personas[$i], '['.$i.']APELLIDOS')->textInput(['maxlength' => true])->label('') ?>
+            </td>
+            <td>
+                <?= $form->field($personas[$i], '['.$i.']GENERO_COD_GENERO')->dropDownList(
+                        ArrayHelper::map(Genero::find()->all(),'COD_GENERO','DESCRIPCION'),
+                        ['prompt'=>'Seleccione Sexo']
+                )->label('') ?>
+            </td>
+            <td>
+                <?= $form->field($personas[$i], '['.$i.']CEDULA')->textInput(['maxlength' => true])->label('') ?>
+            </td>
+            <td>
+                <?= $form->field($personas[$i], '['.$i.']FECHA_NACIMIENTO')->textInput(['maxlength' => true])->label('') ?>
+            </td>
+            <td>
+                <?= $form->field($personaPlanillas[$i], '['.$i.']PARENTESCO_COD_PARENTESCO')->dropDownList(
+                        ArrayHelper::map(Parentesco::find()->all(),'COD_PARENTESCO','DESCRIPCION'),
+                        ['prompt'=>'Seleccione Parentesco']
+                )->label('') ?>
+            </td>
+            <td>
+                <?= $form->field($personaPlanillas[$i], '['.$i.']INGRESO')->textInput(['maxlength' => true])->label('') ?>
+            </td>
+            <td>
+                <?= $form->field($personaPlanillas[$i], '['.$i.']NIVEL_INSTRUCCION_COD_NIV_INST')->dropDownList(
+                        ArrayHelper::map(NivelInstruccion::find()->all(),'COD_NIV_INST','DESCRIPCION'),
+                        ['prompt'=>'Seleccione Nivel de Instrucción']
+                )->label('') ?>
+            </td>
+            <td>
+                <?= $form->field($personaPlanillas[$i], '['.$i.']PROFESION_COD_PROFESION')->dropDownList(
+                        ArrayHelper::map(Profesion::find()->all(),'COD_PROFESION','DESCRIPCION'),
+                        ['prompt'=>'Seleccione Profesión']
+                )->label('') ?>
+            </td>
+        </tr>
+        <?php } ?>
+
+    </table>
+
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

@@ -15,6 +15,8 @@ use app\models\PersonaPlanilla;
 use app\models\Persona;
 use app\models\Genero;
 
+use yii\base\Model;
+
 /**
  * PlanillaController implements the CRUD actions for Planilla model.
  */
@@ -73,10 +75,12 @@ class PlanillaController extends Controller
         $vivienda = new Vivienda();
         $personaPlanilla = new PersonaPlanilla();
         $personaPlanillas = array();
+        $persona = new Persona();
+        $personas = array();
         for ($i=0; $i < 7; $i++) { 
              $personaPlanillas[$i] = new PersonaPlanilla();
+             $personas[$i] = new Persona();
          } 
-        $persona = new Persona();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             //vivienda
@@ -92,11 +96,17 @@ class PlanillaController extends Controller
             $personaPlanilla->PERSONA_ID_PERSONA = $persona->ID_PERSONA;
             $personaPlanilla->JEFE_FAMILIA = 1;
             $personaPlanilla->save();
-            $personaPlanillas[0]->load(Yii::$app->request->post());
             //Model::validateMultiple($dates)
-            //Model::loadMultiple($personaPlanillas, Yii::$app->request->post());
-            for ($i=0; $i < 1; $i++) { 
-             $personaPlanillas[$i]->save();
+            Model::loadMultiple($personaPlanillas, Yii::$app->request->post());
+            Model::loadMultiple($personas, Yii::$app->request->post());
+            //integrantes de la familia
+            for ($i=0; $i < 7; $i++) { 
+                if(strlen($personas[$i]->NOMBRES)<=0)
+                    continue;
+                $personas[$i]->save();
+                $personaPlanillas[$i]->PLANILLA_ID_PLANILLA = $model->ID_PLANILLA;
+                $personaPlanillas[$i]->PERSONA_ID_PERSONA = $personas[$i]->ID_PERSONA;
+                $personaPlanillas[$i]->save();
             } 
             return $this->redirect(['view', 'id' => $model->ID_PLANILLA]);
         } else {
@@ -104,7 +114,9 @@ class PlanillaController extends Controller
                 'model' => $model,
                 'vivienda' => $vivienda,
                 'personaPlanilla' => $personaPlanilla,
+                'personaPlanillas' => $personaPlanillas,
                 'persona' => $persona,
+                'personas' => $personas,
             ]);
         }
     }
