@@ -14,6 +14,7 @@ use app\models\Vivienda;
 use app\models\PersonaPlanilla;
 use app\models\Persona;
 use app\models\Genero;
+use app\models\ActividadComercial;
 
 use yii\base\Model;
 
@@ -77,6 +78,9 @@ class PlanillaController extends Controller
         $personaPlanillas = array();
         $persona = new Persona();
         $personas = array();
+        $actividadComercial = ActividadComercial::find()->all();
+
+
         for ($i=0; $i < 7; $i++) { 
              $personaPlanillas[$i] = new PersonaPlanilla();
              $personas[$i] = new Persona();
@@ -99,6 +103,11 @@ class PlanillaController extends Controller
             //Model::validateMultiple($dates)
             Model::loadMultiple($personaPlanillas, Yii::$app->request->post());
             Model::loadMultiple($personas, Yii::$app->request->post());
+
+            /*
+            muchos a muchos luego de haber guardado $user->link('markets', $market);
+            */
+
             //integrantes de la familia
             for ($i=0; $i < 7; $i++) { 
                 if(strlen($personas[$i]->NOMBRES)<=0)
@@ -108,6 +117,14 @@ class PlanillaController extends Controller
                 $personaPlanillas[$i]->PERSONA_ID_PERSONA = $personas[$i]->ID_PERSONA;
                 $personaPlanillas[$i]->save();
             } 
+
+            //Actividad Comercial
+            foreach ($actividadComercial as $actividad) {
+                if(Yii::$app->request->post('actividadComercial'.$actividad->COD_ACT_COM)){
+                    $model->link('actividadComercial', $actividad);
+                }
+            }
+            
             return $this->redirect(['view', 'id' => $model->ID_PLANILLA]);
         } else {
             return $this->render('create', [
@@ -117,6 +134,7 @@ class PlanillaController extends Controller
                 'personaPlanillas' => $personaPlanillas,
                 'persona' => $persona,
                 'personas' => $personas,
+                'actividadComercial' => $actividadComercial,
             ]);
         }
     }

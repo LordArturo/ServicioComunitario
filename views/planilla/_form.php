@@ -12,6 +12,7 @@ use app\models\EstadoCivil;
 use app\models\NivelInstruccion;
 use app\models\Profesion;
 use app\models\Parentesco;
+use app\models\TipoTrabajo;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Planilla */
@@ -27,37 +28,17 @@ use app\models\Parentesco;
             ['prompt'=>'Seleccione Censo']
       ) ?>
 
+    <!-- 
+    Encabezado de la página 1
+    -->
+
     <?= $form->field($model, 'NRO_PLANILLA')->textInput() ?>
 
     <?= $form->field($model, 'FECHA')->textInput() ?>
-<!--
-    <?= $form->field($model, 'VIVIENDA_COD_VIVIENDA')->textInput() ?>
--->
 
-    <?= $form->field($model, 'INGRESOS_CLASIF_COD_ING_FAM')->dropDownList(
-            ArrayHelper::map(IngresosClasif::find()->all(),'COD_ING_FAM','VALOR'),
-            ['prompt'=>'Seleccione Clasificación de ingresos']
-      ) ?>
-
-    <?= $form->field($model, 'NUMERO_FAMILIAS')->textInput() ?>
-
-    <?= $form->field($model, 'OBSERVACIONES')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'OCV')->textInput() ?>
-
-    <?= $form->field($model, 'CANT_HAB')->textInput() ?>
-
-    <?= $form->field($model, 'AYUDA')->textInput() ?>
-
-    <?= $form->field($model, 'DESCRIPCION_AYUDA')->textInput(['maxlength' => true]) ?>
-
-    <div>Aquí va la vivienda</div> 
-
-    <?= $form->field($vivienda, 'DESCRIPCION')->textInput(['maxlength' => true]) ?>  
-    <?= $form->field($vivienda, 'TIPO_VIVIENDA_COD_TIPO_VIVIENDA')->dropDownList(
-            ArrayHelper::map(TipoVivienda::find()->all(),'COD_TIPO_VIVIENDA','DESCRIPCION'),
-            ['prompt'=>'Seleccione Tipo de Vivienda']
-      ) ?> 
+    <!-- 
+    Sector y dirección
+    -->
 
     <div>Aquí va el jefe de familia</div> 
     <?= $form->field($persona, 'NOMBRES')->textInput(['maxlength' => true]) ?> 
@@ -87,12 +68,23 @@ use app\models\Parentesco;
             ['prompt'=>'Seleccione Profesión']
       ) ?>
     <?= $form->field($personaPlanilla, 'TRABAJA')->textInput(['maxlength' => true]) ?> 
+
+    <?= $form->field($model, 'INGRESOS_CLASIF_COD_ING_FAM')->dropDownList(
+            ArrayHelper::map(IngresosClasif::find()->all(),'COD_ING_FAM','VALOR'),
+            ['prompt'=>'Seleccione Clasificación de ingresos']
+      ) ?>
+
     <?= $form->field($personaPlanilla, 'INGRESO')->textInput(['maxlength' => true]) ?>
+
+
+
+    <?= $form->field($model, 'NUMERO_FAMILIAS')->textInput() ?>
+
 
     <div>Aquí va el resto de intregrantes de la familia</div> 
     <!--
       Pendiente de este código para múltiples modelos
-      --> 
+    --> 
 
     <table>
         <tr>
@@ -152,6 +144,50 @@ use app\models\Parentesco;
 
     </table>
 
+    <?= $form->field($model, 'OBSERVACIONES')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($personaPlanilla, 'TIPO_TRABAJO_COD_TIP_TRAB')->dropDownList(
+            ArrayHelper::map(TipoTrabajo::find()->all(),'COD_TIP_TRAB','DESCRIPCION'),
+            ['prompt'=>'Seleccione tipo de trabajo']
+      ) ?>
+
+    <!--
+      Actividad Comercial
+    --> 
+    Actividad Comercial
+    <?php foreach ($actividadComercial as $actividad) {?>
+        <div>
+            <?= $actividad->DESCRIPCION ?>
+            <input type="checkbox" name="actividadComercial<?= $actividad->COD_ACT_COM ?>">
+        </div>
+    <?php } ?>
+
+    <div>Aquí va la vivienda</div> 
+    <!--
+    <?= $form->field($vivienda, 'DESCRIPCION')->textInput(['maxlength' => true]) ?>  
+    -->
+    <?= $form->field($vivienda, 'TIPO_VIVIENDA_COD_TIPO_VIVIENDA')->dropDownList(
+            ArrayHelper::map(TipoVivienda::find()->all(),'COD_TIPO_VIVIENDA','DESCRIPCION'),
+            ['prompt'=>'Seleccione Tipo de Vivienda']
+      ) ?>
+
+    <!--
+      Forma Vivienda, es manyToMany?
+    --> 
+
+    <?= $form->field($model, 'OCV')->textInput() ?>
+
+
+
+    <?= $form->field($model, 'CANT_HAB')->textInput() ?>
+
+    
+
+    <?= $form->field($model, 'AYUDA')->textInput() ?>
+
+    <?= $form->field($model, 'DESCRIPCION_AYUDA')->textInput(['maxlength' => true]) ?>
+
+    
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

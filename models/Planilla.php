@@ -20,7 +20,7 @@ use Yii;
  * @property string $DESCRIPCION_AYUDA
  * @property integer $CENSO_ID_CENSO
  *
- * @property ActComVivienda[] $actComViviendas
+ * @property ActividadComercial[] $actividadComercial
  * @property AnimalVivienda[] $animalViviendas
  * @property CaractVivienda[] $caractViviendas
  * @property EnfermedadPlanilla[] $enfermedadPlanillas
@@ -85,9 +85,10 @@ class Planilla extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActComViviendas()
+    public function getActividadComercial()
     {
-        return $this->hasMany(ActComVivienda::className(), ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']);
+        return $this->hasMany(ActividadComercial::className(), ['COD_ACT_COM' => 'ACT_COMERCIAL_COD_ACT_COM'])
+            ->viaTable('act_com_vivienda', ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']);
     }
 
     /**

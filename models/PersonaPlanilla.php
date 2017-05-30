@@ -71,7 +71,7 @@ class PersonaPlanilla extends \yii\db\ActiveRecord
             'NIVEL_INSTRUCCION_COD_NIV_INST' => 'Nivel  Instruccion  Cod  Niv  Inst',
             'PROFESION_COD_PROFESION' => 'Profesion  Cod  Profesion',
             'TRABAJA' => 'Trabaja',
-            'TIPO_TRABAJO_COD_TIP_TRAB' => 'Tipo  Trabajo  Cod  Tip  Trab',
+            'TIPO_TRABAJO_COD_TIP_TRAB' => 'Tipo  Trabajo',
             'INGRESO' => 'Ingreso',
             'JEFE_FAMILIA' => 'Jefe  Familia',
             'PARENTESCO_COD_PARENTESCO' => 'Parentesco  Cod  Parentesco',
