@@ -5,21 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "act_comercial".
+ * This is the model class for table "tipo_salubridad".
  *
- * @property integer $COD_ACT_COM
+ * @property integer $COD_TIPO_SALUBRIDAD
  * @property string $DESCRIPCION
  *
  * @property Planilla[] $planillas
  */
-class ActividadComercial extends \yii\db\ActiveRecord
+class TipoSalubridad extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'act_comercial';
+        return 'tipo_salubridad';
     }
 
     /**
@@ -38,7 +38,7 @@ class ActividadComercial extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'COD_ACT_COM' => 'Cod  Act  Com',
+            'COD_TIPO_SALUBRIDAD' => 'Cod  Tipo  Salubridad',
             'DESCRIPCION' => 'Descripcion',
         ];
     }
@@ -46,9 +46,8 @@ class ActividadComercial extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActComViviendas()
+    public function getPlanillas()
     {
-        return $this->hasMany(Planilla::className(), ['ID_PLANILLA' => 'PLANILLA_ID_PLANILLA'])
-            ->viaTable('act_com_vivienda', ['ACT_COMERCIAL_COD_ACT_COM' => 'COD_ACT_COM']);
+        return $this->hasMany(Planilla::className(), ['COD_SALUBRIDAD' => 'COD_TIPO_SALUBRIDAD']);
     }
 }

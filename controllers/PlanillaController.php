@@ -15,6 +15,12 @@ use app\models\PersonaPlanilla;
 use app\models\Persona;
 use app\models\Genero;
 use app\models\ActividadComercial;
+use app\models\TipoCaracteristica;
+use app\models\Caracteristica;
+use app\models\Enseres;
+use app\models\Animal;
+use app\models\TipoAnimal;
+use app\models\Enfermedad;
 
 use yii\base\Model;
 
@@ -79,6 +85,10 @@ class PlanillaController extends Controller
         $persona = new Persona();
         $personas = array();
         $actividadComercial = ActividadComercial::find()->all();
+        $tiposCaracteristicas = TipoCaracteristica::find()->all();
+        $enseres = Enseres::find()->all();
+        $tipoAnimales = TipoAnimal::find()->all();
+        $enfermedades = Enfermedad::find()->all();
 
 
         for ($i=0; $i < 7; $i++) { 
@@ -124,6 +134,44 @@ class PlanillaController extends Controller
                     $model->link('actividadComercial', $actividad);
                 }
             }
+
+            //Características
+            foreach ($tiposCaracteristicas as $tipo) {
+                if($tipo->DESCRIPCION == "Habitaciones de vivienda") {
+                    foreach ($tipo->caracteristicas as $caracteristica) {
+                        if(Yii::$app->request->post('caracteristica'.$caracteristica->COD_CARACT_VIVIENDA))
+                            $model->link('caracteristicas', $caracteristica);
+                    }
+                }else{
+                    $idBuscado = 0;
+                    foreach ($tipo->caracteristicas as $caracteristica) {
+                        if(Yii::$app->request->post('tiposCaracteristica'.$tipo->COD_CARACTERISTICA) == $caracteristica->COD_CARACT_VIVIENDA)
+                            $model->link('caracteristicas', $caracteristica);
+                    }
+                }
+            }
+
+            //Enseres de la vivienda
+            foreach ($enseres as $enser) {
+                if(Yii::$app->request->post('enser'.$enser->COD_ENSERES)){
+                    $model->link('enseres', $enser);
+                }
+            }
+
+            //Animales
+            foreach ($tipoAnimales as $tipo) {
+                foreach ($tipo->animals as $animal) {
+                    if(Yii::$app->request->post('animal'.$animal->COD_ANIMAL))
+                        $model->link('animales', $animal);
+                }
+            }
+
+            //Enfermedades
+            foreach ($enfermedades as $enfermedad) {
+                if(Yii::$app->request->post('enfermedad'.$enfermedad->COD_ENF)){
+                    $model->link('enfermedades', $enfermedad);
+                }
+            }
             
             return $this->redirect(['view', 'id' => $model->ID_PLANILLA]);
         } else {
@@ -135,6 +183,10 @@ class PlanillaController extends Controller
                 'persona' => $persona,
                 'personas' => $personas,
                 'actividadComercial' => $actividadComercial,
+                'tiposCaracteristicas' => $tiposCaracteristicas,
+                'enseres' => $enseres,
+                'tipoAnimales' => $tipoAnimales,
+                'enfermedades' => $enfermedades,
             ]);
         }
     }

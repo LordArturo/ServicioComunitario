@@ -13,6 +13,7 @@ use app\models\NivelInstruccion;
 use app\models\Profesion;
 use app\models\Parentesco;
 use app\models\TipoTrabajo;
+use app\models\TipoSalubridad;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Planilla */
@@ -178,10 +179,82 @@ use app\models\TipoTrabajo;
     <?= $form->field($model, 'OCV')->textInput() ?>
 
 
+    <!--
+      Características Vivienda
+    --> 
+    Características
+    <?php foreach ($tiposCaracteristicas as $tipo) {?>
+        <div>
+            <?= $tipo->DESCRIPCION ?>
+            
+            <?php if($tipo->DESCRIPCION == "Habitaciones de vivienda") {?>
 
+                <?php foreach ($tipo->caracteristicas as $caracteristica) {?>
+                    <div>
+                        <?= $caracteristica->DESCRIPCION ?>
+                        <input type="checkbox" name="caracteristica<?= $caracteristica->COD_CARACT_VIVIENDA ?>">
+                    </div>
+                <?php } ?>
+
+            <?php }else{ ?>
+
+                <select name="tiposCaracteristica<?= $tipo->COD_CARACTERISTICA ?>">
+                <?php foreach ($tipo->caracteristicas as $caracteristica) { ?>
+                    <option value="<?= $caracteristica->COD_CARACT_VIVIENDA ?>"><?= $caracteristica->DESCRIPCION ?></option>
+                <?php } ?>
+                </select>
+
+            <?php }?>
+        </div>
+    <?php } ?>
     <?= $form->field($model, 'CANT_HAB')->textInput() ?>
 
-    
+    <!--
+      Enseres de la vivienda
+    --> 
+    Enseres de la vivienda
+    <?php foreach ($enseres as $enser) {?>
+        <div>
+            <?= $enser->DESCRIPCION ?>
+            <input type="checkbox" name="enser<?= $enser->COD_ENSERES ?>">
+        </div>
+    <?php } ?>
+
+    <!--
+      Salubridad de la vivienda
+    --> 
+    <?= $form->field($model, 'COD_SALUBRIDAD')->dropDownList(
+            ArrayHelper::map(TipoSalubridad::find()->all(),'COD_TIPO_SALUBRIDAD','DESCRIPCION'),
+            ['prompt'=>'Seleccione Salubridad']
+      ) ?>
+
+    <!--
+      Animales domesticos o insectos y roedores
+    --> 
+
+    Animales
+    <?php foreach ($tipoAnimales as $tipo) {?>
+        <div>
+            <?= $tipo->NOMBRE ?>
+            <?php foreach ($tipo->animals as $animal) {?>
+                <div>
+                    <?= $animal->NOMBRE_ANIMAL ?>
+                    <input type="checkbox" name="animal<?= $animal->COD_ANIMAL ?>">
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+
+    <!--
+      Enfermedades
+    --> 
+    Enfermedades
+    <?php foreach ($enfermedades as $enfermedad) {?>
+        <div>
+            <?= $enfermedad->DESCRIPCION ?>
+            <input type="checkbox" name="enfermedad<?= $enfermedad->COD_ENF ?>">
+        </div>
+    <?php } ?>
 
     <?= $form->field($model, 'AYUDA')->textInput() ?>
 

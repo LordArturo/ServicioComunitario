@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2017 a las 10:49:47
+-- Tiempo de generación: 31-05-2017 a las 08:36:55
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -50,13 +50,6 @@ CREATE TABLE `act_com_vivienda` (
   `PLANILLA_ID_PLANILLA` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `act_com_vivienda`
---
-
-INSERT INTO `act_com_vivienda` (`ACT_COMERCIAL_COD_ACT_COM`, `PLANILLA_ID_PLANILLA`) VALUES
-(2, 41);
-
 -- --------------------------------------------------------
 
 --
@@ -68,6 +61,16 @@ CREATE TABLE `animal` (
   `NOMBRE_ANIMAL` varchar(45) DEFAULT NULL,
   `TIPO_ANIMAL_COD_TIPO_ANIMAL` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `animal`
+--
+
+INSERT INTO `animal` (`COD_ANIMAL`, `NOMBRE_ANIMAL`, `TIPO_ANIMAL_COD_TIPO_ANIMAL`) VALUES
+(1, 'perros', 1),
+(2, 'gatos', 1),
+(3, 'moscas', 2),
+(4, 'hormigas', 2);
 
 -- --------------------------------------------------------
 
@@ -104,6 +107,18 @@ CREATE TABLE `caracteristica` (
   `DESCRIPCION` varchar(45) DEFAULT NULL,
   `TIPO_CARACTERISTICA_COD_CARACTERISTICA` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `caracteristica`
+--
+
+INSERT INTO `caracteristica` (`COD_CARACT_VIVIENDA`, `DESCRIPCION`, `TIPO_CARACTERISTICA_COD_CARACTERISTICA`) VALUES
+(1, 'frisadas', 2),
+(2, 'sin frisar', 2),
+(3, 'platabanda', 3),
+(4, 'asbesto', 3),
+(5, 'sala', 1),
+(6, 'comedor', 1);
 
 -- --------------------------------------------------------
 
@@ -147,6 +162,14 @@ CREATE TABLE `enfermedad` (
   `DESCRIPCION` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `enfermedad`
+--
+
+INSERT INTO `enfermedad` (`COD_ENF`, `DESCRIPCION`) VALUES
+(1, 'cáncer'),
+(2, 'diabetes');
+
 -- --------------------------------------------------------
 
 --
@@ -168,6 +191,14 @@ CREATE TABLE `enseres` (
   `COD_ENSERES` int(11) NOT NULL,
   `DESCRIPCION` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `enseres`
+--
+
+INSERT INTO `enseres` (`COD_ENSERES`, `DESCRIPCION`) VALUES
+(1, 'nevera'),
+(2, 'cocina');
 
 -- --------------------------------------------------------
 
@@ -342,38 +373,24 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`CEDULA`, `APELLIDOS`, `NOMBRES`, `TELEF_CELULAR`, `TELEF_HAB`, `GENERO_COD_GENERO`, `ID_PERSONA`, `FECHA_NACIMIENTO`) VALUES
-(1, '1', '1', NULL, NULL, NULL, 1, NULL),
-(NULL, '', '', '', '', NULL, 2, NULL),
-(NULL, '', '', '', '', NULL, 3, NULL),
-(NULL, '', '', '', '', NULL, 4, NULL),
-(NULL, '', '', '', '', NULL, 5, NULL),
-(NULL, '', '', '', '', NULL, 6, NULL),
-(NULL, '', '', '', '', NULL, 7, NULL),
-(NULL, '', '', '', '', NULL, 8, NULL),
-(NULL, '', '', '', '', NULL, 9, NULL),
-(NULL, '', '', '', '', NULL, 10, NULL),
-(NULL, '', '', '', '', NULL, 11, NULL),
-(NULL, '', '', '', '', NULL, 12, NULL),
-(NULL, '', '', '', '', NULL, 13, NULL),
-(NULL, '', 'ar', '', '', NULL, 14, NULL),
-(NULL, '', 'ar', '', '', NULL, 15, NULL),
-(NULL, '', 'ar', '', '', NULL, 16, NULL),
-(NULL, '', 'ar', '', '', NULL, 17, NULL),
-(NULL, '', 'ar', '', '', NULL, 18, NULL),
-(NULL, '', 'ar', '', '', NULL, 19, NULL),
-(NULL, '', 'ar', '', '', NULL, 20, NULL),
-(NULL, '', 'ar', '', '', NULL, 21, NULL),
-(NULL, '', '', '', '', NULL, 22, NULL),
-(NULL, '', '', '', '', NULL, 23, NULL),
-(NULL, '', '', '', '', NULL, 24, NULL),
-(NULL, '', '', '', '', NULL, 25, NULL),
-(NULL, '', '', '', '', NULL, 26, NULL),
-(NULL, '', 'arttt', '', '', NULL, 27, NULL),
-(NULL, '', 'bb', NULL, NULL, NULL, 28, NULL),
-(NULL, '', 'nn', NULL, NULL, NULL, 29, NULL),
-(NULL, '', 'd', NULL, NULL, NULL, 30, NULL),
-(NULL, '', '', '', '', NULL, 31, NULL),
-(NULL, '', '', '', '', NULL, 32, NULL);
+(NULL, '', '', '', '', NULL, 33, NULL),
+(NULL, '', '', '', '', NULL, 34, NULL),
+(NULL, '', '', '', '', NULL, 35, NULL),
+(NULL, '', '', '', '', NULL, 36, NULL),
+(NULL, '', '', '', '', NULL, 37, NULL),
+(NULL, '', '', '', '', NULL, 38, NULL),
+(NULL, '', '', '', '', NULL, 39, NULL),
+(NULL, '', '', '', '', NULL, 40, NULL),
+(NULL, '', '', '', '', NULL, 41, NULL),
+(NULL, '', '', '', '', NULL, 42, NULL),
+(NULL, '', '', '', '', NULL, 43, NULL),
+(NULL, '', '', '', '', NULL, 44, NULL),
+(NULL, '', '', '', '', NULL, 45, NULL),
+(NULL, '', '', '', '', 1, 46, NULL),
+(NULL, '', '', '', '', NULL, 47, NULL),
+(NULL, '', '', '', '', NULL, 48, NULL),
+(NULL, '', '', '', '', NULL, 49, NULL),
+(NULL, '', '', '', '', NULL, 50, NULL);
 
 -- --------------------------------------------------------
 
@@ -397,66 +414,6 @@ CREATE TABLE `persona_planilla` (
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `persona_planilla`
---
-
-INSERT INTO `persona_planilla` (`PLANILLA_ID_PLANILLA`, `PERSONA_ID_PERSONA`, `CORREO`, `ESTADO_CIVIL_COD_EST_CIV`, `NIVEL_INSTRUCCION_COD_NIV_INST`, `PROFESION_COD_PROFESION`, `TRABAJA`, `TIPO_TRABAJO_COD_TIP_TRAB`, `INGRESO`, `JEFE_FAMILIA`, `PARENTESCO_COD_PARENTESCO`, `ACTIVISTA_COMUNAL`, `ID`) VALUES
-(21, 1, '', NULL, NULL, NULL, 1, NULL, 1, 1, NULL, NULL, 3),
-(22, 2, '', 1, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 4),
-(23, 3, '', 1, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 5),
-(24, 4, '', 1, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 6),
-(NULL, NULL, '', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 7),
-(25, 5, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 8),
-(25, 6, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 9),
-(26, 7, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 10),
-(27, 8, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 11),
-(28, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 12),
-(29, 10, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 13),
-(30, 11, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 14),
-(31, 12, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 15),
-(32, 13, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 16),
-(33, 14, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 17),
-(33, 15, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18),
-(33, 16, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 19),
-(33, 17, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20),
-(33, 18, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21),
-(33, 19, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 22),
-(33, 20, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 23),
-(33, 21, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 24),
-(34, 22, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 25),
-(35, 23, '', NULL, NULL, NULL, NULL, NULL, 5000, 1, NULL, NULL, 26),
-(36, 24, '', NULL, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL, 27),
-(36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, 28),
-(36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 29),
-(36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, NULL, NULL, NULL, 30),
-(36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 31),
-(36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 32),
-(36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 33),
-(36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34),
-(37, 25, '', NULL, NULL, NULL, NULL, NULL, 44, 1, NULL, NULL, 35),
-(37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 55, NULL, NULL, NULL, 36),
-(37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 55, NULL, NULL, NULL, 37),
-(37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 66, NULL, NULL, NULL, 38),
-(37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 39),
-(37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 40),
-(37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 41),
-(37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 42),
-(38, 26, '', NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, 43),
-(38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, 44),
-(38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, 45),
-(38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 46),
-(38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, NULL, NULL, NULL, 47),
-(38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, NULL, NULL, NULL, 48),
-(38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 49),
-(38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 50),
-(39, 27, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 51),
-(39, 28, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 52),
-(39, 29, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 53),
-(39, 30, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 54),
-(40, 31, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 55),
-(41, 32, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 56);
-
 -- --------------------------------------------------------
 
 --
@@ -475,36 +432,9 @@ CREATE TABLE `planilla` (
   `CANT_HAB` int(11) DEFAULT NULL,
   `AYUDA` int(11) DEFAULT NULL,
   `DESCRIPCION_AYUDA` varchar(150) DEFAULT NULL,
-  `CENSO_ID_CENSO` int(11) NOT NULL
+  `CENSO_ID_CENSO` int(11) NOT NULL,
+  `COD_SALUBRIDAD` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `planilla`
---
-
-INSERT INTO `planilla` (`NRO_PLANILLA`, `FECHA`, `VIVIENDA_COD_VIVIENDA`, `ID_PLANILLA`, `INGRESOS_CLASIF_COD_ING_FAM`, `NUMERO_FAMILIAS`, `OBSERVACIONES`, `OCV`, `CANT_HAB`, `AYUDA`, `DESCRIPCION_AYUDA`, `CENSO_ID_CENSO`) VALUES
-(43, NULL, 11, 20, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(43, NULL, 12, 21, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(435, NULL, 13, 22, 2, NULL, '', NULL, NULL, NULL, '', 1),
-(435, NULL, 14, 23, 2, NULL, '', NULL, NULL, NULL, '', 1),
-(435, NULL, 15, 24, 2, NULL, '', NULL, NULL, NULL, '', 1),
-(12, NULL, 16, 25, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(5435, NULL, 17, 26, 1, NULL, '', NULL, NULL, NULL, '', 2),
-(5435, NULL, 18, 27, 1, NULL, '', NULL, NULL, NULL, '', 2),
-(5435, NULL, 19, 28, 1, NULL, '', NULL, NULL, NULL, '', 2),
-(5435, NULL, 20, 29, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(543, NULL, 21, 30, 1, NULL, '', NULL, NULL, NULL, '', 2),
-(5345, NULL, 22, 31, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(4444, NULL, 23, 32, 1, NULL, '', NULL, NULL, NULL, '', 2),
-(5435, NULL, 24, 33, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(3434, NULL, 25, 34, 1, NULL, '', NULL, NULL, NULL, '', 2),
-(5345, NULL, 26, 35, 1, NULL, '', NULL, NULL, NULL, '', 2),
-(56, NULL, 27, 36, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(4444, NULL, 28, 37, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(54, NULL, 29, 38, 1, NULL, '', NULL, NULL, NULL, '', 2),
-(43534, NULL, 30, 39, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(534, NULL, 31, 40, 1, NULL, '', NULL, NULL, NULL, '', 1),
-(534, NULL, 32, 41, 1, NULL, '', NULL, NULL, NULL, '', 1);
 
 -- --------------------------------------------------------
 
@@ -542,17 +472,6 @@ CREATE TABLE `rol` (
 
 INSERT INTO `rol` (`COD_ROL`, `DESCRIPCION`) VALUES
 (1, 'ADMINISTRADOR');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `salubridad_vivienda`
---
-
-CREATE TABLE `salubridad_vivienda` (
-  `TIPO_SALUBRIDAD_COD_TIPO_SALUBRIDAD` int(11) NOT NULL,
-  `PLANILLA_ID_PLANILLA` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -599,6 +518,14 @@ CREATE TABLE `tipo_animal` (
   `NOMBRE` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tipo_animal`
+--
+
+INSERT INTO `tipo_animal` (`COD_TIPO_ANIMAL`, `NOMBRE`) VALUES
+(1, 'Animales domesticos'),
+(2, 'Insectos y roedores');
+
 -- --------------------------------------------------------
 
 --
@@ -617,7 +544,7 @@ CREATE TABLE `tipo_caracteristica` (
 INSERT INTO `tipo_caracteristica` (`COD_CARACTERISTICA`, `DESCRIPCION`) VALUES
 (1, 'Habitaciones de vivienda'),
 (2, 'Tipo de Paredes'),
-(3, 'Tipo de techos');
+(3, 'Tipo de techo');
 
 -- --------------------------------------------------------
 
@@ -629,6 +556,14 @@ CREATE TABLE `tipo_salubridad` (
   `COD_TIPO_SALUBRIDAD` int(11) NOT NULL,
   `DESCRIPCION` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tipo_salubridad`
+--
+
+INSERT INTO `tipo_salubridad` (`COD_TIPO_SALUBRIDAD`, `DESCRIPCION`) VALUES
+(1, 'limpia'),
+(2, 'sucia');
 
 -- --------------------------------------------------------
 
@@ -720,35 +655,7 @@ CREATE TABLE `vivienda` (
 --
 
 INSERT INTO `vivienda` (`COD_VIVIENDA`, `DESCRIPCION`, `TIPO_VIVIENDA_COD_TIPO_VIVIENDA`, `CALLE_NRO_CALLE`) VALUES
-(4, '', NULL, NULL),
-(5, 'nmflsdi', NULL, NULL),
-(6, 'fsd', 1, NULL),
-(7, 'casa', 1, NULL),
-(8, 'casa1', 2, NULL),
-(9, 'fsdf', 1, NULL),
-(10, 'fsdf', 1, NULL),
-(11, 'fsdf', 1, NULL),
-(12, 'fsdf', 1, NULL),
-(13, '', NULL, NULL),
-(14, '', NULL, NULL),
-(15, '', NULL, NULL),
-(16, '', NULL, NULL),
-(17, '', NULL, NULL),
-(18, '', NULL, NULL),
-(19, '', NULL, NULL),
-(20, '', NULL, NULL),
-(21, '', NULL, NULL),
-(22, '', NULL, NULL),
-(23, '', NULL, NULL),
-(24, '', NULL, NULL),
-(25, '', NULL, NULL),
-(26, '', NULL, NULL),
-(27, '', NULL, NULL),
-(28, '', NULL, NULL),
-(29, '', NULL, NULL),
-(30, '', NULL, NULL),
-(31, '', NULL, NULL),
-(32, '', NULL, NULL);
+(50, NULL, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -917,7 +824,8 @@ ALTER TABLE `planilla`
   ADD PRIMARY KEY (`ID_PLANILLA`),
   ADD KEY `fk_PLANILLA_VIVIENDA1_idx` (`VIVIENDA_COD_VIVIENDA`),
   ADD KEY `fk_PLANILLA_INGRESOS_CLASIF1_idx` (`INGRESOS_CLASIF_COD_ING_FAM`),
-  ADD KEY `fk_PLANILLA_CENSO1_idx` (`CENSO_ID_CENSO`);
+  ADD KEY `fk_PLANILLA_CENSO1_idx` (`CENSO_ID_CENSO`),
+  ADD KEY `fk_PLANILLA_SALUBRIDAD1` (`COD_SALUBRIDAD`);
 
 --
 -- Indices de la tabla `profesion`
@@ -930,13 +838,6 @@ ALTER TABLE `profesion`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`COD_ROL`);
-
---
--- Indices de la tabla `salubridad_vivienda`
---
-ALTER TABLE `salubridad_vivienda`
-  ADD KEY `fk_SALUBRIDAD_VIVIENDA_TIPO_SALUBRIDAD1_idx` (`TIPO_SALUBRIDAD_COD_TIPO_SALUBRIDAD`),
-  ADD KEY `fk_SALUBRIDAD_VIVIENDA_PLANILLA1_idx` (`PLANILLA_ID_PLANILLA`);
 
 --
 -- Indices de la tabla `sector`
@@ -1022,7 +923,7 @@ ALTER TABLE `act_comercial`
 -- AUTO_INCREMENT de la tabla `animal`
 --
 ALTER TABLE `animal`
-  MODIFY `COD_ANIMAL` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_ANIMAL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `calle`
 --
@@ -1032,7 +933,7 @@ ALTER TABLE `calle`
 -- AUTO_INCREMENT de la tabla `caracteristica`
 --
 ALTER TABLE `caracteristica`
-  MODIFY `COD_CARACT_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_CARACT_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `censo`
 --
@@ -1042,12 +943,12 @@ ALTER TABLE `censo`
 -- AUTO_INCREMENT de la tabla `enfermedad`
 --
 ALTER TABLE `enfermedad`
-  MODIFY `COD_ENF` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_ENF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `enseres`
 --
 ALTER TABLE `enseres`
-  MODIFY `COD_ENSERES` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_ENSERES` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `estado_civil`
 --
@@ -1082,17 +983,17 @@ ALTER TABLE `parentesco`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `ID_PERSONA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ID_PERSONA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT de la tabla `persona_planilla`
 --
 ALTER TABLE `persona_planilla`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT de la tabla `planilla`
 --
 ALTER TABLE `planilla`
-  MODIFY `ID_PLANILLA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ID_PLANILLA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT de la tabla `profesion`
 --
@@ -1117,7 +1018,7 @@ ALTER TABLE `servicio`
 -- AUTO_INCREMENT de la tabla `tipo_animal`
 --
 ALTER TABLE `tipo_animal`
-  MODIFY `COD_TIPO_ANIMAL` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_TIPO_ANIMAL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tipo_caracteristica`
 --
@@ -1127,7 +1028,7 @@ ALTER TABLE `tipo_caracteristica`
 -- AUTO_INCREMENT de la tabla `tipo_salubridad`
 --
 ALTER TABLE `tipo_salubridad`
-  MODIFY `COD_TIPO_SALUBRIDAD` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_TIPO_SALUBRIDAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tipo_servicio`
 --
@@ -1152,7 +1053,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `vivienda`
 --
 ALTER TABLE `vivienda`
-  MODIFY `COD_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `COD_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- Restricciones para tablas volcadas
 --
@@ -1175,7 +1076,7 @@ ALTER TABLE `animal`
 --
 ALTER TABLE `animal_vivienda`
   ADD CONSTRAINT `fk_ANIMAL_VIVIENDA_ANIMAL1` FOREIGN KEY (`ANIMAL_COD_ANIMAL`) REFERENCES `animal` (`COD_ANIMAL`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ANIMAL_VIVIENDA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_ANIMAL_VIVIENDA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `calle`
@@ -1201,14 +1102,14 @@ ALTER TABLE `caract_vivienda`
 --
 ALTER TABLE `enfermedad_planilla`
   ADD CONSTRAINT `fk_ENFERMEDAD_PLANILLA_ENFERMEDAD1` FOREIGN KEY (`ENFERMEDAD_COD_ENF`) REFERENCES `enfermedad` (`COD_ENF`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ENFERMEDAD_PLANILLA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_ENFERMEDAD_PLANILLA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `enseres_vivienda`
 --
 ALTER TABLE `enseres_vivienda`
   ADD CONSTRAINT `fk_ENSERES_VIVIENDA_ENSERES1` FOREIGN KEY (`ENSERES_COD_ENSERES`) REFERENCES `enseres` (`COD_ENSERES`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ENSERES_VIVIENDA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_ENSERES_VIVIENDA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `exclusion_planilla`
@@ -1237,8 +1138,8 @@ ALTER TABLE `persona_planilla`
   ADD CONSTRAINT `fk_PERSONA_PLANILLA_ESTADO_CIVIL1` FOREIGN KEY (`ESTADO_CIVIL_COD_EST_CIV`) REFERENCES `estado_civil` (`COD_EST_CIV`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_PERSONA_PLANILLA_NIVEL_INSTRUCCION1` FOREIGN KEY (`NIVEL_INSTRUCCION_COD_NIV_INST`) REFERENCES `nivel_instruccion` (`COD_NIV_INST`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_PERSONA_PLANILLA_PARENTESCO1` FOREIGN KEY (`PARENTESCO_COD_PARENTESCO`) REFERENCES `parentesco` (`COD_PARENTESCO`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PERSONA_PLANILLA_PERSONA1` FOREIGN KEY (`PERSONA_ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PERSONA_PLANILLA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_PERSONA_PLANILLA_PERSONA1` FOREIGN KEY (`PERSONA_ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_PERSONA_PLANILLA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_PERSONA_PLANILLA_PROFESION1` FOREIGN KEY (`PROFESION_COD_PROFESION`) REFERENCES `profesion` (`COD_PROFESION`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_PERSONA_PLANILLA_TIPO_TRABAJO1` FOREIGN KEY (`TIPO_TRABAJO_COD_TIP_TRAB`) REFERENCES `tipo_trabajo` (`COD_TIP_TRAB`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -1248,14 +1149,8 @@ ALTER TABLE `persona_planilla`
 ALTER TABLE `planilla`
   ADD CONSTRAINT `fk_PLANILLA_CENSO1` FOREIGN KEY (`CENSO_ID_CENSO`) REFERENCES `censo` (`ID_CENSO`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_PLANILLA_INGRESOS_CLASIF1` FOREIGN KEY (`INGRESOS_CLASIF_COD_ING_FAM`) REFERENCES `ingresos_clasif` (`COD_ING_FAM`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PLANILLA_VIVIENDA1` FOREIGN KEY (`VIVIENDA_COD_VIVIENDA`) REFERENCES `vivienda` (`COD_VIVIENDA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `salubridad_vivienda`
---
-ALTER TABLE `salubridad_vivienda`
-  ADD CONSTRAINT `fk_SALUBRIDAD_VIVIENDA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_SALUBRIDAD_VIVIENDA_TIPO_SALUBRIDAD1` FOREIGN KEY (`TIPO_SALUBRIDAD_COD_TIPO_SALUBRIDAD`) REFERENCES `tipo_salubridad` (`COD_TIPO_SALUBRIDAD`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_PLANILLA_SALUBRIDAD1` FOREIGN KEY (`COD_SALUBRIDAD`) REFERENCES `tipo_salubridad` (`COD_TIPO_SALUBRIDAD`),
+  ADD CONSTRAINT `fk_PLANILLA_VIVIENDA1` FOREIGN KEY (`VIVIENDA_COD_VIVIENDA`) REFERENCES `vivienda` (`COD_VIVIENDA`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `servicio`

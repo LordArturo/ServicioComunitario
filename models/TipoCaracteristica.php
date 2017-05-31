@@ -5,21 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "act_comercial".
+ * This is the model class for table "tipo_caracteristica".
  *
- * @property integer $COD_ACT_COM
+ * @property integer $COD_CARACTERISTICA
  * @property string $DESCRIPCION
  *
- * @property Planilla[] $planillas
+ * @property Caracteristica[] $caracteristicas
  */
-class ActividadComercial extends \yii\db\ActiveRecord
+class TipoCaracteristica extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'act_comercial';
+        return 'tipo_caracteristica';
     }
 
     /**
@@ -28,6 +28,7 @@ class ActividadComercial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['DESCRIPCION'], 'required'],
             [['DESCRIPCION'], 'string', 'max' => 45],
         ];
     }
@@ -38,7 +39,7 @@ class ActividadComercial extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'COD_ACT_COM' => 'Cod  Act  Com',
+            'COD_CARACTERISTICA' => 'Cod  Caracteristica',
             'DESCRIPCION' => 'Descripcion',
         ];
     }
@@ -46,9 +47,8 @@ class ActividadComercial extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActComViviendas()
+    public function getCaracteristicas()
     {
-        return $this->hasMany(Planilla::className(), ['ID_PLANILLA' => 'PLANILLA_ID_PLANILLA'])
-            ->viaTable('act_com_vivienda', ['ACT_COMERCIAL_COD_ACT_COM' => 'COD_ACT_COM']);
+        return $this->hasMany(Caracteristica::className(), ['TIPO_CARACTERISTICA_COD_CARACTERISTICA' => 'COD_CARACTERISTICA']);
     }
 }
