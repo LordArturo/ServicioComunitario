@@ -49,14 +49,14 @@ class Persona extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'CEDULA' => 'Cedula',
+            'CEDULA' => 'Cédula',
             'APELLIDOS' => 'Apellidos',
             'NOMBRES' => 'Nombres',
             'TELEF_CELULAR' => 'Teléfono  Celular',
-            'TELEF_HAB' => 'Teléfono  Habitación',
-            'GENERO_COD_GENERO' => 'Genero  Cod  Genero',
+            'TELEF_HAB' => 'Teléfono  de Habitación',
+            'GENERO_COD_GENERO' => 'Género',
             'ID_PERSONA' => 'Id  Persona',
-            'FECHA_NACIMIENTO' => 'Fecha  Nacimiento',
+            'FECHA_NACIMIENTO' => 'Fecha de Nacimiento',
         ];
     }
 

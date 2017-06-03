@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+//use yii\bootstrap\ActiveForm;
 
 use yii\helpers\ArrayHelper;
 use app\models\Censo;
@@ -24,20 +25,40 @@ use app\models\Sector;
 
 <div class="planilla-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'CENSO_ID_CENSO')->dropDownList(
-            ArrayHelper::map(Censo::find()->all(),'ID_CENSO','DESCRIPCION'),
-            ['prompt'=>'Seleccione Censo']
-      ) ?>
+    <?php $form = ActiveForm::begin([
+        //'layout' => 'horizontal',
+        /*'fieldConfig' => [
+            'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+            'horizontalCssClasses' => [
+                'label' => 'col-sm-4',
+                'offset' => '',//col-sm-offset-4
+                'wrapper' => 'col-sm-8',
+                'error' => '',
+                'hint' => '',
+            ],
+        ]*/
+    ]); ?>
 
     <!-- 
     Encabezado de la página 1
     -->
 
-    <?= $form->field($model, 'NRO_PLANILLA')->textInput() ?>
 
-    <?= $form->field($model, 'FECHA')->widget(\yii\jui\DatePicker::classname(), [
+    <div class="row">
+        <div class="col-md-4">
+        <?= $form->field($model, 'CENSO_ID_CENSO')->dropDownList(
+            ArrayHelper::map(Censo::find()->all(),'ID_CENSO','DESCRIPCION'),
+            ['prompt'=>'Seleccione Censo']
+      ) ?>
+            
+        </div>
+        <div class="col-md-4">
+        <?= $form->field($model, 'NRO_PLANILLA')->textInput(/*['class' => 'col-md-6']*/) ?>
+            
+        </div>
+        <div class="col-md-4">
+
+        <?= $form->field($model, 'FECHA')->widget(\yii\jui\DatePicker::classname(), [
     //'language' => 'ru',
     //'dateFormat' => 'yyyy-MM-dd',
     //'value'=> '1970-01-01',
@@ -45,78 +66,124 @@ use app\models\Sector;
     //'clientOptions' => ['defaultDate' => '2014-01-01']
     'clientOptions' => ['dateFormat' => 'yy-mm-dd']
      ])?>
+            
+        </div>
 
-    <!-- 
+
+        <!-- 
     Sector y dirección
     -->
-
-    <?= $form->field($calle, 'SECTOR_COD_SECTOR')->dropDownList(
+        <div class="col-md-6">
+        <?= $form->field($calle, 'SECTOR_COD_SECTOR')->dropDownList(
             ArrayHelper::map(Sector::find()->all(),'COD_SECTOR','NOMBRE_SECTOR'),
             ['prompt'=>'Seleccione Sector']
       ) ?>
-    <?= $form->field($calle, 'NOMBRE_CALLE')->textInput() ?>
+        </div>
+        <div class="col-md-6"> 
+        <?= $form->field($calle, 'NOMBRE_CALLE')->textInput() ?>
+        </div>
 
-    <div>Aquí va el jefe de familia</div> 
-    <?= $form->field($persona, 'NOMBRES')->textInput(['maxlength' => true]) ?> 
-    <?= $form->field($persona, 'APELLIDOS')->textInput(['maxlength' => true]) ?> 
-    <?= $form->field($persona, 'CEDULA')->textInput(['maxlength' => true]) ?> 
-    <?= $form->field($persona, 'FECHA_NACIMIENTO')->textInput(['maxlength' => true]) ?> 
-    <?= $form->field($persona, 'GENERO_COD_GENERO')->dropDownList(
+
+        <div class="col-md-12"> 
+        <h2>Jefe de familia</h2>
+        </div>
+        <div class="col-md-4"> 
+        <?= $form->field($persona, 'NOMBRES')->textInput(['maxlength' => true]) ?> 
+        </div>
+        <div class="col-md-4"> 
+        <?= $form->field($persona, 'APELLIDOS')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-4"> 
+        <?= $form->field($persona, 'CEDULA')->textInput(['maxlength' => true]) ?> 
+        </div>
+        <div class="col-md-4"> 
+        <?= $form->field($persona, 'FECHA_NACIMIENTO')->widget(\yii\jui\DatePicker::classname(), [
+            'options' => ['class' => 'form-control'],
+            'clientOptions' => ['dateFormat' => 'yy-mm-dd']
+        ])?>
+        </div>
+        <div class="col-md-4"> 
+        <?= $form->field($persona, 'GENERO_COD_GENERO')->dropDownList(
             ArrayHelper::map(Genero::find()->all(),'COD_GENERO','DESCRIPCION'),
             ['prompt'=>'Seleccione Sexo']
       ) ?>
-    <?= $form->field($persona, 'TELEF_CELULAR')->textInput(['maxlength' => true]) ?> 
-    <?= $form->field($persona, 'TELEF_HAB')->textInput(['maxlength' => true]) ?> 
-
-    <?= $form->field($personaPlanilla, 'CORREO')->textInput(['maxlength' => true]) ?> 
-    <?= $form->field($personaPlanilla, 'ESTADO_CIVIL_COD_EST_CIV')->dropDownList(
+        </div>
+        <div class="col-md-4"> 
+        <?= $form->field($persona, 'TELEF_CELULAR')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-4"> 
+        <?= $form->field($persona, 'TELEF_HAB')->textInput(['maxlength' => true]) ?> 
+        </div>
+        <div class="col-md-4"> 
+        <?= $form->field($personaPlanilla, 'CORREO')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-4"> 
+        <?= $form->field($personaPlanilla, 'ESTADO_CIVIL_COD_EST_CIV')->dropDownList(
             ArrayHelper::map(EstadoCivil::find()->all(),'COD_EST_CIV','DESCRIPCION'),
             ['prompt'=>'Seleccione Estado Civil']
       ) ?>
       
-
-    <?= $form->field($personaPlanilla, 'NIVEL_INSTRUCCION_COD_NIV_INST')->dropDownList(
+        </div>
+        <div class="col-md-4">
+        <?= $form->field($personaPlanilla, 'NIVEL_INSTRUCCION_COD_NIV_INST')->dropDownList(
             ArrayHelper::map(NivelInstruccion::find()->all(),'COD_NIV_INST','DESCRIPCION'),
             ['prompt'=>'Seleccione Nivel de Instrucción']
       ) ?>
-    <?= $form->field($personaPlanilla, 'PROFESION_COD_PROFESION')->dropDownList(
+        </div>
+        <div class="col-md-4">
+        <?= $form->field($personaPlanilla, 'PROFESION_COD_PROFESION')->dropDownList(
             ArrayHelper::map(Profesion::find()->all(),'COD_PROFESION','DESCRIPCION'),
             ['prompt'=>'Seleccione Profesión']
       ) ?>
-    <?= $form->field($personaPlanilla, 'TRABAJA')->textInput(['maxlength' => true]) ?> 
-
-    <?= $form->field($model, 'INGRESOS_CLASIF_COD_ING_FAM')->dropDownList(
-            ArrayHelper::map(IngresosClasif::find()->all(),'COD_ING_FAM','VALOR'),
-            ['prompt'=>'Seleccione Clasificación de ingresos']
+        </div>
+        <div class="col-md-4">
+        <?= $form->field($personaPlanilla, 'TRABAJA')->dropDownList(
+            ['1' => 'Sí', '0' => 'No']
+            //['prompt'=>'Trabaja']
       ) ?>
+        </div>
+        <div class="col-md-4">
+        <?= $form->field($model, 'INGRESOS_CLASIF_COD_ING_FAM')->dropDownList(
+            ArrayHelper::map(IngresosClasif::find()->all(),'COD_ING_FAM','VALOR')
+            //['prompt'=>'Seleccione Clasificación de ingresos']
+      ) ?>
+        </div>
+        <div class="col-md-4">
+        <?= $form->field($personaPlanilla, 'INGRESO')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($personaPlanilla, 'INGRESO')->textInput(['maxlength' => true]) ?>
+
+        <div class="col-md-12"> 
+        <h2>Características del grupo familiar</h2>
+        </div>
+        <div class="col-md-4">
+        <?= $form->field($model, 'NUMERO_FAMILIAS')->textInput() ?>
+        </div>
 
 
-
-    <?= $form->field($model, 'NUMERO_FAMILIAS')->textInput() ?>
-
-
-    <div>Aquí va el resto de intregrantes de la familia</div> 
+        <div class="col-md-12"> 
+        <h4>Integrantes:</h4>
+        </div> 
     <!--
       Pendiente de este código para múltiples modelos
     --> 
-
-    <table>
+    <div class="col-md-12"> 
+    <div class="table-responsive text-center">
+    <table class="table table-bordered table-striped" cellspacing="0" width="100%">
         <tr>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Sexo</th>
-            <th>Cédula</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Parentesco</th>
-            <th>Ingreso</th>
-            <th>Nivel de Instrucción</th>
-            <th>Profesión</th>
+            <th class="text-center" style="min-width: 150px;">Nombres</th>
+            <th class="text-center" style="min-width: 150px;">Apellidos</th>
+            <th class="text-center" style="min-width: 100px;">Sexo</th>
+            <th class="text-center" style="min-width: 100px;">Cédula</th>
+            <th class="text-center" style="min-width: 200px;">Fecha de Nacimiento</th>
+            <th class="text-center" style="min-width: 100px;">Parentesco</th>
+            <th class="text-center" style="min-width: 100px;">Ingreso</th>
+            <th class="text-center" style="min-width: 200px;">Nivel de Instrucción</th>
+            <th class="text-center" style="min-width: 100px;">Profesión</th>
         </tr>
         <?php for($i=0; $i < 7; $i++) { ?>
         <tr>
-            <td>
+            <td style="width: 500px;">
                 <?= $form->field($personas[$i], '['.$i.']NOMBRES')->textInput(['maxlength' => true])->label('') ?>
             </td>
             <td>
@@ -131,7 +198,7 @@ use app\models\Sector;
             <td>
                 <?= $form->field($personas[$i], '['.$i.']CEDULA')->textInput(['maxlength' => true])->label('') ?>
             </td>
-            <td>
+            <td class="col-sm-2">
                 <?= $form->field($personas[$i], '['.$i.']FECHA_NACIMIENTO')->textInput(['maxlength' => true])->label('') ?>
             </td>
             <td>
@@ -159,6 +226,52 @@ use app\models\Sector;
         <?php } ?>
 
     </table>
+    </div>
+    </div>
+
+
+
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+
+
+
+     
+    
+    
+    
+     
+    
+
+     
+    
+
+    
+    
+     
+
+    
+
+    
+
+
+    </div>
+    
+
+
+
+    
+
+
+    
 
     <?= $form->field($model, 'OBSERVACIONES')->textInput(['maxlength' => true]) ?>
 

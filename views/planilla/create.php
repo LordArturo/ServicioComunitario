@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Planilla */
 
-$this->title = 'Create Planilla';
+$this->title = 'Crear Planilla';
 $this->params['breadcrumbs'][] = ['label' => 'Planillas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -32,3 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4"> 
+        </div>
+    </div>

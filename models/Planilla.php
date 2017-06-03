@@ -83,18 +83,18 @@ class Planilla extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'NRO_PLANILLA' => 'Nro Planilla',
+            'NRO_PLANILLA' => 'Número de Planilla',
             'FECHA' => 'Fecha',
             'VIVIENDA_COD_VIVIENDA' => 'Vivienda  Cod  Vivienda',
             'ID_PLANILLA' => 'Id  Planilla',
-            'INGRESOS_CLASIF_COD_ING_FAM' => 'Clasificación de ingresos',
-            'NUMERO_FAMILIAS' => 'Numero  Familias',
+            'INGRESOS_CLASIF_COD_ING_FAM' => 'Clasificación de ingreso',
+            'NUMERO_FAMILIAS' => 'Número de Familias',
             'OBSERVACIONES' => 'Observaciones',
             'OCV' => 'Ocv',
             'CANT_HAB' => 'Cant  Hab',
             'AYUDA' => 'Ayuda',
             'DESCRIPCION_AYUDA' => 'Descripción  Ayuda',
-            'CENSO_ID_CENSO' => 'Censo  Id  Censo',
+            'CENSO_ID_CENSO' => 'Censo',
             'COD_SALUBRIDAD' => 'Salubridad de la Vivienda',
             'organizaciones_comunitarias' => '¿Existen organizaciones comunitarias?',
             'organizaciones_comunitarias_cuales' => '¿Cúales?',

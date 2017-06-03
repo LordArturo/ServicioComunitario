@@ -44,8 +44,8 @@ class Calle extends \yii\db\ActiveRecord
     {
         return [
             'NRO_CALLE' => 'Nro  Calle',
-            'NOMBRE_CALLE' => 'Nombre  Calle',
-            'SECTOR_COD_SECTOR' => 'Sector  Cod  Sector',
+            'NOMBRE_CALLE' => 'Calle',
+            'SECTOR_COD_SECTOR' => 'Sector',
         ];
     }
 

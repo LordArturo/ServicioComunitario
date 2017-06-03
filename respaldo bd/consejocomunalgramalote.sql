@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2017 a las 06:02:49
+-- Tiempo de generación: 03-06-2017 a las 09:03:31
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -105,7 +105,8 @@ INSERT INTO `calle` (`NRO_CALLE`, `NOMBRE_CALLE`, `SECTOR_COD_SECTOR`) VALUES
 (2, '', NULL),
 (3, '', NULL),
 (4, '', 1),
-(5, '', NULL);
+(5, '', NULL),
+(6, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -147,16 +148,10 @@ CREATE TABLE `caract_vivienda` (
 --
 
 INSERT INTO `caract_vivienda` (`CARACTERISTICA_COD_CARACT_VIVIENDA`, `PLANILLA_ID_PLANILLA`) VALUES
-(1, 4),
-(3, 4),
-(1, 6),
-(3, 6),
-(1, 8),
-(3, 8),
-(1, 9),
-(3, 9),
 (1, 10),
-(3, 10);
+(3, 10),
+(1, 11),
+(3, 11);
 
 -- --------------------------------------------------------
 
@@ -255,7 +250,10 @@ CREATE TABLE `estado_civil` (
 
 INSERT INTO `estado_civil` (`COD_EST_CIV`, `DESCRIPCION`) VALUES
 (1, 'Soltero(a)'),
-(2, 'Casado(a)');
+(2, 'Casado(a)'),
+(3, 'Divorciado(a)'),
+(4, 'Viudo(a)'),
+(5, 'Concubino(a)');
 
 -- --------------------------------------------------------
 
@@ -342,8 +340,11 @@ CREATE TABLE `ingresos_clasif` (
 --
 
 INSERT INTO `ingresos_clasif` (`COD_ING_FAM`, `VALOR`) VALUES
-(1, 'mucho'),
-(2, 'poco');
+(1, 'Diario'),
+(2, 'Semanal'),
+(3, 'Quincenal'),
+(4, 'Mensual'),
+(5, 'Por trabajo realizado');
 
 -- --------------------------------------------------------
 
@@ -362,7 +363,12 @@ CREATE TABLE `nivel_instruccion` (
 
 INSERT INTO `nivel_instruccion` (`COD_NIV_INST`, `DESCRIPCION`) VALUES
 (1, 'Sin instrucción'),
-(2, 'Básica');
+(2, 'Básica'),
+(3, 'Bachiller'),
+(4, 'Técnico medio'),
+(5, 'Técnico superior'),
+(6, 'Universitario'),
+(7, 'Post Grado');
 
 -- --------------------------------------------------------
 
@@ -381,7 +387,11 @@ CREATE TABLE `parentesco` (
 
 INSERT INTO `parentesco` (`COD_PARENTESCO`, `DESCRIPCION`) VALUES
 (1, 'Hermano'),
-(2, 'Padre');
+(2, 'Padre'),
+(3, 'Primo'),
+(4, 'Tío'),
+(5, 'Abuelo'),
+(6, 'Nieto');
 
 -- --------------------------------------------------------
 
@@ -432,7 +442,8 @@ INSERT INTO `persona` (`CEDULA`, `APELLIDOS`, `NOMBRES`, `TELEF_CELULAR`, `TELEF
 (NULL, '', '', '', '', NULL, 57, NULL),
 (NULL, '', '', '', '', NULL, 58, NULL),
 (NULL, '', '', '', '', NULL, 59, NULL),
-(NULL, '', '', '', '', NULL, 60, NULL);
+(NULL, '', '', '', '', NULL, 60, NULL),
+(NULL, '', '', '', '', NULL, 61, NULL);
 
 -- --------------------------------------------------------
 
@@ -461,11 +472,8 @@ CREATE TABLE `persona_planilla` (
 --
 
 INSERT INTO `persona_planilla` (`PLANILLA_ID_PLANILLA`, `PERSONA_ID_PERSONA`, `CORREO`, `ESTADO_CIVIL_COD_EST_CIV`, `NIVEL_INSTRUCCION_COD_NIV_INST`, `PROFESION_COD_PROFESION`, `TRABAJA`, `TIPO_TRABAJO_COD_TIP_TRAB`, `INGRESO`, `JEFE_FAMILIA`, `PARENTESCO_COD_PARENTESCO`, `ACTIVISTA_COMUNAL`, `ID`) VALUES
-(4, 54, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 4),
-(6, 56, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 6),
-(8, 57, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 7),
-(9, 58, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 8),
-(10, 59, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 9);
+(10, 59, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 9),
+(11, 61, '', NULL, NULL, NULL, 1, NULL, NULL, 1, NULL, NULL, 10);
 
 -- --------------------------------------------------------
 
@@ -500,12 +508,8 @@ CREATE TABLE `planilla` (
 --
 
 INSERT INTO `planilla` (`NRO_PLANILLA`, `FECHA`, `VIVIENDA_COD_VIVIENDA`, `ID_PLANILLA`, `INGRESOS_CLASIF_COD_ING_FAM`, `NUMERO_FAMILIAS`, `OBSERVACIONES`, `OCV`, `CANT_HAB`, `AYUDA`, `DESCRIPCION_AYUDA`, `CENSO_ID_CENSO`, `COD_SALUBRIDAD`, `organizaciones_comunitarias`, `organizaciones_comunitarias_cuales`, `servicio_o_bien`, `principales_potencialidades`, `principales_problemas`, `FORMA_TENENCIA_COD_FORM_TEN`) VALUES
-(5345, NULL, 54, 4, 1, NULL, '', NULL, NULL, NULL, '', 2, NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(543543, NULL, 56, 6, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6546, '0000-00-00', NULL, 7, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL),
-(6546, '0000-00-00', 57, 8, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL),
-(64, '0000-00-00', 58, 9, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL),
-(543534, '2017-06-22', 59, 10, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL);
+(543534, '2017-06-22', 59, 10, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL),
+(535, NULL, 61, 11, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -524,7 +528,9 @@ CREATE TABLE `profesion` (
 
 INSERT INTO `profesion` (`COD_PROFESION`, `DESCRIPCION`) VALUES
 (1, 'Ingeniero'),
-(2, 'Doctor');
+(2, 'Médico'),
+(3, 'Docente'),
+(4, 'Otra');
 
 -- --------------------------------------------------------
 
@@ -758,7 +764,8 @@ INSERT INTO `vivienda` (`COD_VIVIENDA`, `DESCRIPCION`, `TIPO_VIVIENDA_COD_TIPO_V
 (57, NULL, NULL, 2),
 (58, NULL, NULL, 3),
 (59, NULL, NULL, 4),
-(60, NULL, NULL, 5);
+(60, NULL, NULL, 5),
+(61, NULL, NULL, 6);
 
 --
 -- Índices para tablas volcadas
@@ -1025,7 +1032,7 @@ ALTER TABLE `animal`
 -- AUTO_INCREMENT de la tabla `calle`
 --
 ALTER TABLE `calle`
-  MODIFY `NRO_CALLE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `NRO_CALLE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `caracteristica`
 --
@@ -1050,7 +1057,7 @@ ALTER TABLE `enseres`
 -- AUTO_INCREMENT de la tabla `estado_civil`
 --
 ALTER TABLE `estado_civil`
-  MODIFY `COD_EST_CIV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_EST_CIV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `exclusion`
 --
@@ -1070,37 +1077,37 @@ ALTER TABLE `genero`
 -- AUTO_INCREMENT de la tabla `ingresos_clasif`
 --
 ALTER TABLE `ingresos_clasif`
-  MODIFY `COD_ING_FAM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_ING_FAM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `nivel_instruccion`
 --
 ALTER TABLE `nivel_instruccion`
-  MODIFY `COD_NIV_INST` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_NIV_INST` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `parentesco`
 --
 ALTER TABLE `parentesco`
-  MODIFY `COD_PARENTESCO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_PARENTESCO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `ID_PERSONA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `ID_PERSONA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT de la tabla `persona_planilla`
 --
 ALTER TABLE `persona_planilla`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `planilla`
 --
 ALTER TABLE `planilla`
-  MODIFY `ID_PLANILLA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_PLANILLA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `profesion`
 --
 ALTER TABLE `profesion`
-  MODIFY `COD_PROFESION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_PROFESION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
@@ -1155,7 +1162,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `vivienda`
 --
 ALTER TABLE `vivienda`
-  MODIFY `COD_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `COD_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- Restricciones para tablas volcadas
 --
