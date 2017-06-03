@@ -39,7 +39,7 @@ class Persona extends \yii\db\ActiveRecord
             [['CEDULA', 'GENERO_COD_GENERO', 'ID_PERSONA'], 'integer'],
             [['FECHA_NACIMIENTO'], 'safe'],
             [['APELLIDOS', 'NOMBRES', 'TELEF_CELULAR', 'TELEF_HAB'], 'string', 'max' => 45],
-            //[['GENERO_COD_GENERO'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['GENERO_COD_GENERO' => 'COD_GENERO']],
+            [['GENERO_COD_GENERO'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['GENERO_COD_GENERO' => 'COD_GENERO']],
         ];
     }
 

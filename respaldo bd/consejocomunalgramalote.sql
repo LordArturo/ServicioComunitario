@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2017 a las 08:36:55
+-- Tiempo de generación: 03-06-2017 a las 06:02:49
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -93,8 +93,19 @@ CREATE TABLE `animal_vivienda` (
 CREATE TABLE `calle` (
   `NRO_CALLE` int(11) NOT NULL,
   `NOMBRE_CALLE` varchar(45) DEFAULT NULL,
-  `SECTOR_COD_SECTOR` int(11) NOT NULL
+  `SECTOR_COD_SECTOR` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `calle`
+--
+
+INSERT INTO `calle` (`NRO_CALLE`, `NOMBRE_CALLE`, `SECTOR_COD_SECTOR`) VALUES
+(1, '54645', 2),
+(2, '', NULL),
+(3, '', NULL),
+(4, '', 1),
+(5, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -130,6 +141,22 @@ CREATE TABLE `caract_vivienda` (
   `CARACTERISTICA_COD_CARACT_VIVIENDA` int(11) NOT NULL,
   `PLANILLA_ID_PLANILLA` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `caract_vivienda`
+--
+
+INSERT INTO `caract_vivienda` (`CARACTERISTICA_COD_CARACT_VIVIENDA`, `PLANILLA_ID_PLANILLA`) VALUES
+(1, 4),
+(3, 4),
+(1, 6),
+(3, 6),
+(1, 8),
+(3, 8),
+(1, 9),
+(3, 9),
+(1, 10),
+(3, 10);
 
 -- --------------------------------------------------------
 
@@ -241,6 +268,14 @@ CREATE TABLE `exclusion` (
   `NOMBRE` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `exclusion`
+--
+
+INSERT INTO `exclusion` (`COD_EXCLUSION`, `NOMBRE`) VALUES
+(1, 'Niños de la calle'),
+(2, 'Indigentes');
+
 -- --------------------------------------------------------
 
 --
@@ -264,16 +299,13 @@ CREATE TABLE `forma_tenencia` (
   `DESCRIPCION` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `forma_t_vivienda`
+-- Volcado de datos para la tabla `forma_tenencia`
 --
 
-CREATE TABLE `forma_t_vivienda` (
-  `FORMA_TENENCIA_COD_FORM_TEN` int(11) NOT NULL,
-  `PLANILLA_ID_PLANILLA` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `forma_tenencia` (`COD_FORM_TEN`, `DESCRIPCION`) VALUES
+(1, 'Propia'),
+(2, 'Alquilada');
 
 -- --------------------------------------------------------
 
@@ -390,7 +422,17 @@ INSERT INTO `persona` (`CEDULA`, `APELLIDOS`, `NOMBRES`, `TELEF_CELULAR`, `TELEF
 (NULL, '', '', '', '', NULL, 47, NULL),
 (NULL, '', '', '', '', NULL, 48, NULL),
 (NULL, '', '', '', '', NULL, 49, NULL),
-(NULL, '', '', '', '', NULL, 50, NULL);
+(NULL, '', '', '', '', NULL, 50, NULL),
+(NULL, '', '', '', '', NULL, 51, NULL),
+(NULL, '', '', '', '', NULL, 52, NULL),
+(NULL, '', '', '', '', NULL, 53, NULL),
+(NULL, '', '', '', '', NULL, 54, NULL),
+(NULL, '', '', '', '', NULL, 55, NULL),
+(NULL, '', '', '', '', NULL, 56, NULL),
+(NULL, '', '', '', '', NULL, 57, NULL),
+(NULL, '', '', '', '', NULL, 58, NULL),
+(NULL, '', '', '', '', NULL, 59, NULL),
+(NULL, '', '', '', '', NULL, 60, NULL);
 
 -- --------------------------------------------------------
 
@@ -414,6 +456,17 @@ CREATE TABLE `persona_planilla` (
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `persona_planilla`
+--
+
+INSERT INTO `persona_planilla` (`PLANILLA_ID_PLANILLA`, `PERSONA_ID_PERSONA`, `CORREO`, `ESTADO_CIVIL_COD_EST_CIV`, `NIVEL_INSTRUCCION_COD_NIV_INST`, `PROFESION_COD_PROFESION`, `TRABAJA`, `TIPO_TRABAJO_COD_TIP_TRAB`, `INGRESO`, `JEFE_FAMILIA`, `PARENTESCO_COD_PARENTESCO`, `ACTIVISTA_COMUNAL`, `ID`) VALUES
+(4, 54, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 4),
+(6, 56, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 6),
+(8, 57, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 7),
+(9, 58, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 8),
+(10, 59, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 9);
+
 -- --------------------------------------------------------
 
 --
@@ -433,8 +486,26 @@ CREATE TABLE `planilla` (
   `AYUDA` int(11) DEFAULT NULL,
   `DESCRIPCION_AYUDA` varchar(150) DEFAULT NULL,
   `CENSO_ID_CENSO` int(11) NOT NULL,
-  `COD_SALUBRIDAD` int(11) DEFAULT NULL
+  `COD_SALUBRIDAD` int(11) DEFAULT NULL,
+  `organizaciones_comunitarias` int(11) DEFAULT NULL,
+  `organizaciones_comunitarias_cuales` varchar(150) DEFAULT NULL,
+  `servicio_o_bien` varchar(150) DEFAULT NULL,
+  `principales_potencialidades` varchar(150) DEFAULT NULL,
+  `principales_problemas` varchar(150) DEFAULT NULL,
+  `FORMA_TENENCIA_COD_FORM_TEN` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `planilla`
+--
+
+INSERT INTO `planilla` (`NRO_PLANILLA`, `FECHA`, `VIVIENDA_COD_VIVIENDA`, `ID_PLANILLA`, `INGRESOS_CLASIF_COD_ING_FAM`, `NUMERO_FAMILIAS`, `OBSERVACIONES`, `OCV`, `CANT_HAB`, `AYUDA`, `DESCRIPCION_AYUDA`, `CENSO_ID_CENSO`, `COD_SALUBRIDAD`, `organizaciones_comunitarias`, `organizaciones_comunitarias_cuales`, `servicio_o_bien`, `principales_potencialidades`, `principales_problemas`, `FORMA_TENENCIA_COD_FORM_TEN`) VALUES
+(5345, NULL, 54, 4, 1, NULL, '', NULL, NULL, NULL, '', 2, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(543543, NULL, 56, 6, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6546, '0000-00-00', NULL, 7, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL),
+(6546, '0000-00-00', 57, 8, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL),
+(64, '0000-00-00', 58, 9, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL),
+(543534, '2017-06-22', 59, 10, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -484,6 +555,14 @@ CREATE TABLE `sector` (
   `NOMBRE_SECTOR` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `sector`
+--
+
+INSERT INTO `sector` (`COD_SECTOR`, `NOMBRE_SECTOR`) VALUES
+(1, 'Sector 1'),
+(2, 'Sector 2');
+
 -- --------------------------------------------------------
 
 --
@@ -495,6 +574,16 @@ CREATE TABLE `servicio` (
   `DESCRIPCION` varchar(45) DEFAULT NULL,
   `TIPO_SERVICIO_COD_TIPO_SERV` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `servicio`
+--
+
+INSERT INTO `servicio` (`COD_SERVICIO`, `DESCRIPCION`, `TIPO_SERVICIO_COD_TIPO_SERV`) VALUES
+(1, 'Acueducto', 1),
+(2, 'Camión', 1),
+(3, 'Cloacas', 2),
+(4, 'Pozo séptico', 2);
 
 -- --------------------------------------------------------
 
@@ -576,6 +665,14 @@ CREATE TABLE `tipo_servicio` (
   `DESCRIPCION` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tipo_servicio`
+--
+
+INSERT INTO `tipo_servicio` (`COD_TIPO_SERV`, `DESCRIPCION`) VALUES
+(1, 'Aguas blancas'),
+(2, 'Aguas servidas');
+
 -- --------------------------------------------------------
 
 --
@@ -655,7 +752,13 @@ CREATE TABLE `vivienda` (
 --
 
 INSERT INTO `vivienda` (`COD_VIVIENDA`, `DESCRIPCION`, `TIPO_VIVIENDA_COD_TIPO_VIVIENDA`, `CALLE_NRO_CALLE`) VALUES
-(50, NULL, NULL, NULL);
+(54, NULL, NULL, NULL),
+(55, NULL, NULL, NULL),
+(56, NULL, NULL, 1),
+(57, NULL, NULL, 2),
+(58, NULL, NULL, 3),
+(59, NULL, NULL, 4),
+(60, NULL, NULL, 5);
 
 --
 -- Índices para tablas volcadas
@@ -767,13 +870,6 @@ ALTER TABLE `forma_tenencia`
   ADD PRIMARY KEY (`COD_FORM_TEN`);
 
 --
--- Indices de la tabla `forma_t_vivienda`
---
-ALTER TABLE `forma_t_vivienda`
-  ADD KEY `fk_FORMA_T_VIVIENDA_FORMA_TENENCIA1_idx` (`FORMA_TENENCIA_COD_FORM_TEN`),
-  ADD KEY `fk_FORMA_T_VIVIENDA_PLANILLA1_idx` (`PLANILLA_ID_PLANILLA`);
-
---
 -- Indices de la tabla `genero`
 --
 ALTER TABLE `genero`
@@ -825,7 +921,8 @@ ALTER TABLE `planilla`
   ADD KEY `fk_PLANILLA_VIVIENDA1_idx` (`VIVIENDA_COD_VIVIENDA`),
   ADD KEY `fk_PLANILLA_INGRESOS_CLASIF1_idx` (`INGRESOS_CLASIF_COD_ING_FAM`),
   ADD KEY `fk_PLANILLA_CENSO1_idx` (`CENSO_ID_CENSO`),
-  ADD KEY `fk_PLANILLA_SALUBRIDAD1` (`COD_SALUBRIDAD`);
+  ADD KEY `fk_PLANILLA_SALUBRIDAD1` (`COD_SALUBRIDAD`),
+  ADD KEY `fk_PLANILLA_FORMA_TENENCIA1` (`FORMA_TENENCIA_COD_FORM_TEN`);
 
 --
 -- Indices de la tabla `profesion`
@@ -928,7 +1025,7 @@ ALTER TABLE `animal`
 -- AUTO_INCREMENT de la tabla `calle`
 --
 ALTER TABLE `calle`
-  MODIFY `NRO_CALLE` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `NRO_CALLE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `caracteristica`
 --
@@ -955,10 +1052,15 @@ ALTER TABLE `enseres`
 ALTER TABLE `estado_civil`
   MODIFY `COD_EST_CIV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT de la tabla `exclusion`
+--
+ALTER TABLE `exclusion`
+  MODIFY `COD_EXCLUSION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT de la tabla `forma_tenencia`
 --
 ALTER TABLE `forma_tenencia`
-  MODIFY `COD_FORM_TEN` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_FORM_TEN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `genero`
 --
@@ -983,17 +1085,17 @@ ALTER TABLE `parentesco`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `ID_PERSONA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `ID_PERSONA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT de la tabla `persona_planilla`
 --
 ALTER TABLE `persona_planilla`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `planilla`
 --
 ALTER TABLE `planilla`
-  MODIFY `ID_PLANILLA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `ID_PLANILLA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `profesion`
 --
@@ -1008,12 +1110,12 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `sector`
 --
 ALTER TABLE `sector`
-  MODIFY `COD_SECTOR` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_SECTOR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  MODIFY `COD_SERVICIO` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_SERVICIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tipo_animal`
 --
@@ -1033,7 +1135,7 @@ ALTER TABLE `tipo_salubridad`
 -- AUTO_INCREMENT de la tabla `tipo_servicio`
 --
 ALTER TABLE `tipo_servicio`
-  MODIFY `COD_TIPO_SERV` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `COD_TIPO_SERV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tipo_trabajo`
 --
@@ -1053,7 +1155,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `vivienda`
 --
 ALTER TABLE `vivienda`
-  MODIFY `COD_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `COD_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- Restricciones para tablas volcadas
 --
@@ -1116,14 +1218,7 @@ ALTER TABLE `enseres_vivienda`
 --
 ALTER TABLE `exclusion_planilla`
   ADD CONSTRAINT `fk_EXCLUSION_PLANILLA_EXCLUSION1` FOREIGN KEY (`EXCLUSION_COD_EXCLUSION`) REFERENCES `exclusion` (`COD_EXCLUSION`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_EXCLUSION_PLANILLA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `forma_t_vivienda`
---
-ALTER TABLE `forma_t_vivienda`
-  ADD CONSTRAINT `fk_FORMA_T_VIVIENDA_FORMA_TENENCIA1` FOREIGN KEY (`FORMA_TENENCIA_COD_FORM_TEN`) REFERENCES `forma_tenencia` (`COD_FORM_TEN`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_FORMA_T_VIVIENDA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_EXCLUSION_PLANILLA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `persona`
@@ -1148,6 +1243,7 @@ ALTER TABLE `persona_planilla`
 --
 ALTER TABLE `planilla`
   ADD CONSTRAINT `fk_PLANILLA_CENSO1` FOREIGN KEY (`CENSO_ID_CENSO`) REFERENCES `censo` (`ID_CENSO`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_PLANILLA_FORMA_TENENCIA1` FOREIGN KEY (`FORMA_TENENCIA_COD_FORM_TEN`) REFERENCES `forma_tenencia` (`COD_FORM_TEN`),
   ADD CONSTRAINT `fk_PLANILLA_INGRESOS_CLASIF1` FOREIGN KEY (`INGRESOS_CLASIF_COD_ING_FAM`) REFERENCES `ingresos_clasif` (`COD_ING_FAM`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_PLANILLA_SALUBRIDAD1` FOREIGN KEY (`COD_SALUBRIDAD`) REFERENCES `tipo_salubridad` (`COD_TIPO_SALUBRIDAD`),
   ADD CONSTRAINT `fk_PLANILLA_VIVIENDA1` FOREIGN KEY (`VIVIENDA_COD_VIVIENDA`) REFERENCES `vivienda` (`COD_VIVIENDA`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1162,7 +1258,7 @@ ALTER TABLE `servicio`
 -- Filtros para la tabla `servicio_vivienda`
 --
 ALTER TABLE `servicio_vivienda`
-  ADD CONSTRAINT `fk_SERVICIO_VIVIENDA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_SERVICIO_VIVIENDA_PLANILLA1` FOREIGN KEY (`PLANILLA_ID_PLANILLA`) REFERENCES `planilla` (`ID_PLANILLA`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_SERVICIO_VIVIENDA_SERVICIO1` FOREIGN KEY (`SERVICIO_COD_SERVICIO`) REFERENCES `servicio` (`COD_SERVICIO`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

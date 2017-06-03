@@ -21,6 +21,11 @@ use app\models\Enseres;
 use app\models\Animal;
 use app\models\TipoAnimal;
 use app\models\Enfermedad;
+use app\models\Exclusion;
+use app\models\ExclusionPlanilla;
+use app\models\TipoServicio;
+use app\models\Servicio;
+use app\models\Calle;
 
 use yii\base\Model;
 
@@ -89,6 +94,9 @@ class PlanillaController extends Controller
         $enseres = Enseres::find()->all();
         $tipoAnimales = TipoAnimal::find()->all();
         $enfermedades = Enfermedad::find()->all();
+        $exclusiones = Exclusion::find()->all();
+        $tipoServicios = TipoServicio::find()->all();
+        $calle = new Calle();
 
 
         for ($i=0; $i < 7; $i++) { 
@@ -97,8 +105,13 @@ class PlanillaController extends Controller
          } 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+            //calle y sector
+            $calle->load(Yii::$app->request->post());
+            $calle->save();
             //vivienda
             $vivienda->load(Yii::$app->request->post());
+            $vivienda->CALLE_NRO_CALLE= $calle->NRO_CALLE;
             $vivienda->save();
             $model->VIVIENDA_COD_VIVIENDA= $vivienda->COD_VIVIENDA;
             $model->save();
@@ -172,6 +185,25 @@ class PlanillaController extends Controller
                     $model->link('enfermedades', $enfermedad);
                 }
             }
+
+            //Exclusión
+            foreach ($exclusiones as $exclusion) {
+                if(Yii::$app->request->post('exclusion'.$exclusion->COD_EXCLUSION)){
+                    $aux = new ExclusionPlanilla();
+                    $aux->PLANILLA_ID_PLANILLA = $model->ID_PLANILLA;
+                    $aux->EXCLUSION_COD_EXCLUSION = $exclusion->COD_EXCLUSION;
+                    $aux->CANTIDAD = Yii::$app->request->post('exclusionCantidad'.$exclusion->COD_EXCLUSION);
+                    $aux->save();
+                }
+            }
+
+            //Servicios
+            foreach ($tipoServicios as $tipo) {
+                foreach ($tipo->servicios as $servicio) {
+                    if(Yii::$app->request->post('servicio'.$servicio->COD_SERVICIO))
+                        $model->link('servicios', $servicio);
+                }
+            }
             
             return $this->redirect(['view', 'id' => $model->ID_PLANILLA]);
         } else {
@@ -187,6 +219,9 @@ class PlanillaController extends Controller
                 'enseres' => $enseres,
                 'tipoAnimales' => $tipoAnimales,
                 'enfermedades' => $enfermedades,
+                'exclusiones' => $exclusiones,
+                'tipoServicios' => $tipoServicios,
+                'calle' => $calle,
             ]);
         }
     }

@@ -14,6 +14,8 @@ use app\models\Profesion;
 use app\models\Parentesco;
 use app\models\TipoTrabajo;
 use app\models\TipoSalubridad;
+use app\models\FormaTenencia;
+use app\models\Sector;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Planilla */
@@ -35,11 +37,24 @@ use app\models\TipoSalubridad;
 
     <?= $form->field($model, 'NRO_PLANILLA')->textInput() ?>
 
-    <?= $form->field($model, 'FECHA')->textInput() ?>
+    <?= $form->field($model, 'FECHA')->widget(\yii\jui\DatePicker::classname(), [
+    //'language' => 'ru',
+    //'dateFormat' => 'yyyy-MM-dd',
+    //'value'=> '1970-01-01',
+    'options' => ['class' => 'form-control'],
+    //'clientOptions' => ['defaultDate' => '2014-01-01']
+    'clientOptions' => ['dateFormat' => 'yy-mm-dd']
+     ])?>
 
     <!-- 
     Sector y dirección
     -->
+
+    <?= $form->field($calle, 'SECTOR_COD_SECTOR')->dropDownList(
+            ArrayHelper::map(Sector::find()->all(),'COD_SECTOR','NOMBRE_SECTOR'),
+            ['prompt'=>'Seleccione Sector']
+      ) ?>
+    <?= $form->field($calle, 'NOMBRE_CALLE')->textInput() ?>
 
     <div>Aquí va el jefe de familia</div> 
     <?= $form->field($persona, 'NOMBRES')->textInput(['maxlength' => true]) ?> 
@@ -173,8 +188,12 @@ use app\models\TipoSalubridad;
       ) ?>
 
     <!--
-      Forma Vivienda, es manyToMany?
+      Forma Tenencia Vivienda
     --> 
+    <?= $form->field($model, 'FORMA_TENENCIA_COD_FORM_TEN')->dropDownList(
+            ArrayHelper::map(FormaTenencia::find()->all(),'COD_FORM_TEN','DESCRIPCION'),
+            ['prompt'=>'Seleccione Tipo de Tenencia de la Vivienda']
+      ) ?>
 
     <?= $form->field($model, 'OCV')->textInput() ?>
 
@@ -259,6 +278,51 @@ use app\models\TipoSalubridad;
     <?= $form->field($model, 'AYUDA')->textInput() ?>
 
     <?= $form->field($model, 'DESCRIPCION_AYUDA')->textInput(['maxlength' => true]) ?>
+
+
+    <!--
+      Exclusión
+    --> 
+    Situación de exclusión
+    <?php foreach ($exclusiones as $exclusion) {?>
+        <div>
+            <?= $exclusion->NOMBRE ?>
+            <input type="checkbox" name="exclusion<?= $exclusion->COD_EXCLUSION ?>">
+            Cuantos
+            <input type="number" name="exclusionCantidad<?= $exclusion->COD_EXCLUSION ?>" value="0">
+        </div>
+    <?php } ?>
+
+
+    <!--
+      Servicios de la vivienda e incluído parte de servicios comunales
+    --> 
+
+    Servicios
+    <?php foreach ($tipoServicios as $tipo) {?>
+        <div>
+            <?= $tipo->DESCRIPCION ?>
+            <?php foreach ($tipo->servicios as $servicio) {?>
+                <div>
+                    <?= $servicio->DESCRIPCION ?>
+                    <input type="checkbox" name="servicio<?= $servicio->COD_SERVICIO ?>">
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+
+    <!--
+      Participación comunitaria y situación de la comunidad
+    --> 
+
+    <?= $form->field($model, 'organizaciones_comunitarias')->textInput() ?>
+
+    <?= $form->field($model, 'organizaciones_comunitarias_cuales')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'servicio_o_bien')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'principales_potencialidades')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'principales_problemas')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($personaPlanilla, 'ACTIVISTA_COMUNAL')->textInput() ?>
 
     
 

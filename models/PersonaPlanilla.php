@@ -48,13 +48,13 @@ class PersonaPlanilla extends \yii\db\ActiveRecord
             [['PLANILLA_ID_PLANILLA', 'PERSONA_ID_PERSONA', 'ESTADO_CIVIL_COD_EST_CIV', 'NIVEL_INSTRUCCION_COD_NIV_INST', 'PROFESION_COD_PROFESION', 'TRABAJA', 'TIPO_TRABAJO_COD_TIP_TRAB', 'JEFE_FAMILIA', 'PARENTESCO_COD_PARENTESCO', 'ACTIVISTA_COMUNAL'], 'integer'],
             [['INGRESO'], 'number'],
             [['CORREO'], 'string', 'max' => 45],
-            //[['ESTADO_CIVIL_COD_EST_CIV'], 'exist', 'skipOnError' => true, 'targetClass' => EstadoCivil::className(), 'targetAttribute' => ['ESTADO_CIVIL_COD_EST_CIV' => 'COD_EST_CIV']],
-            //[['NIVEL_INSTRUCCION_COD_NIV_INST'], 'exist', 'skipOnError' => true, 'targetClass' => NivelInstruccion::className(), 'targetAttribute' => ['NIVEL_INSTRUCCION_COD_NIV_INST' => 'COD_NIV_INST']],
-            //[['PARENTESCO_COD_PARENTESCO'], 'exist', 'skipOnError' => true, 'targetClass' => Parentesco::className(), 'targetAttribute' => ['PARENTESCO_COD_PARENTESCO' => 'COD_PARENTESCO']],
-            //[['PERSONA_ID_PERSONA'], 'exist', 'skipOnError' => true, 'targetClass' => Persona::className(), 'targetAttribute' => ['PERSONA_ID_PERSONA' => 'ID_PERSONA']],
+            [['ESTADO_CIVIL_COD_EST_CIV'], 'exist', 'skipOnError' => true, 'targetClass' => EstadoCivil::className(), 'targetAttribute' => ['ESTADO_CIVIL_COD_EST_CIV' => 'COD_EST_CIV']],
+            [['NIVEL_INSTRUCCION_COD_NIV_INST'], 'exist', 'skipOnError' => true, 'targetClass' => NivelInstruccion::className(), 'targetAttribute' => ['NIVEL_INSTRUCCION_COD_NIV_INST' => 'COD_NIV_INST']],
+            [['PARENTESCO_COD_PARENTESCO'], 'exist', 'skipOnError' => true, 'targetClass' => Parentesco::className(), 'targetAttribute' => ['PARENTESCO_COD_PARENTESCO' => 'COD_PARENTESCO']],
+            [['PERSONA_ID_PERSONA'], 'exist', 'skipOnError' => true, 'targetClass' => Persona::className(), 'targetAttribute' => ['PERSONA_ID_PERSONA' => 'ID_PERSONA']],
             [['PLANILLA_ID_PLANILLA'], 'exist', 'skipOnError' => true, 'targetClass' => Planilla::className(), 'targetAttribute' => ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']],
-            //[['PROFESION_COD_PROFESION'], 'exist', 'skipOnError' => true, 'targetClass' => Profesion::className(), 'targetAttribute' => ['PROFESION_COD_PROFESION' => 'COD_PROFESION']],
-            //[['TIPO_TRABAJO_COD_TIP_TRAB'], 'exist', 'skipOnError' => true, 'targetClass' => TipoTrabajo::className(), 'targetAttribute' => ['TIPO_TRABAJO_COD_TIP_TRAB' => 'COD_TIP_TRAB']],
+            [['PROFESION_COD_PROFESION'], 'exist', 'skipOnError' => true, 'targetClass' => Profesion::className(), 'targetAttribute' => ['PROFESION_COD_PROFESION' => 'COD_PROFESION']],
+            [['TIPO_TRABAJO_COD_TIP_TRAB'], 'exist', 'skipOnError' => true, 'targetClass' => TipoTrabajo::className(), 'targetAttribute' => ['TIPO_TRABAJO_COD_TIP_TRAB' => 'COD_TIP_TRAB']],
         ];
     }
 

@@ -20,6 +20,12 @@ use Yii;
  * @property string $DESCRIPCION_AYUDA
  * @property integer $CENSO_ID_CENSO
  * @property integer $COD_SALUBRIDAD
+ * @property integer $FORMA_TENENCIA_COD_FORM_TEN
+ * @property integer $organizaciones_comunitarias
+ * @property string $organizaciones_comunitarias_cuales
+ * @property string $servicio_o_bien
+ * @property string $principales_potencialidades
+ * @property string $principales_problemas
  *
  * @property ActividadComercial[] $actividadComercial
  * @property Animal[] $animales
@@ -27,13 +33,14 @@ use Yii;
  * @property Enfermedad[] $enfermedades
  * @property Enseres[] $enseres
  * @property ExclusionPlanilla[] $exclusionPlanillas
- * @property FormaTVivienda[] $formaTViviendas
+ * @property FormaTenencia[] $formaTenencias
  * @property PersonaPlanilla[] $personaPlanillas
  * @property Vivienda $vIVIENDACODVIVIENDA
  * @property IngresosClasif $iNGRESOSCLASIFCODINGFAM
  * @property Censo $cENSOIDCENSO
+ * @property FormaTenencia $fORMATENENCIACODFORMTEN
  * @property SalubridadVivienda[] $salubridadViviendas
- * @property ServicioVivienda[] $servicioViviendas
+ * @property Servicio[] $servicios
  * @property TipoSalubridad $cODSALUBRIDAD
  */
 class Planilla extends \yii\db\ActiveRecord
@@ -53,14 +60,20 @@ class Planilla extends \yii\db\ActiveRecord
     {
         return [
             [['NRO_PLANILLA', 'INGRESOS_CLASIF_COD_ING_FAM', 'CENSO_ID_CENSO'], 'required'],
-            [['NRO_PLANILLA', 'VIVIENDA_COD_VIVIENDA', 'INGRESOS_CLASIF_COD_ING_FAM', 'NUMERO_FAMILIAS', 'OCV', 'CANT_HAB', 'AYUDA', 'CENSO_ID_CENSO'], 'integer'],
+            [['NRO_PLANILLA', 'VIVIENDA_COD_VIVIENDA', 'INGRESOS_CLASIF_COD_ING_FAM', 'NUMERO_FAMILIAS', 'OCV', 'CANT_HAB', 'AYUDA', 'CENSO_ID_CENSO', 'organizaciones_comunitarias'], 'integer'],
             [['FECHA'], 'safe'],
+            //['FECHA', 'default', 'value' => '23/06/2017'],
             [['OBSERVACIONES'], 'string', 'max' => 200],
             [['DESCRIPCION_AYUDA'], 'string', 'max' => 150],
+            [['organizaciones_comunitarias_cuales'], 'string', 'max' => 150],
+            [['servicio_o_bien'], 'string', 'max' => 150],
+            [['principales_potencialidades'], 'string', 'max' => 150],
+            [['principales_problemas'], 'string', 'max' => 150],
             [['VIVIENDA_COD_VIVIENDA'], 'exist', 'skipOnError' => true, 'targetClass' => Vivienda::className(), 'targetAttribute' => ['VIVIENDA_COD_VIVIENDA' => 'COD_VIVIENDA']],
             [['INGRESOS_CLASIF_COD_ING_FAM'], 'exist', 'skipOnError' => true, 'targetClass' => IngresosClasif::className(), 'targetAttribute' => ['INGRESOS_CLASIF_COD_ING_FAM' => 'COD_ING_FAM']],
             [['CENSO_ID_CENSO'], 'exist', 'skipOnError' => true, 'targetClass' => Censo::className(), 'targetAttribute' => ['CENSO_ID_CENSO' => 'ID_CENSO']],
             [['COD_SALUBRIDAD'], 'exist', 'skipOnError' => true, 'targetClass' => TipoSalubridad::className(), 'targetAttribute' => ['COD_SALUBRIDAD' => 'COD_TIPO_SALUBRIDAD']],
+            [['FORMA_TENENCIA_COD_FORM_TEN'], 'exist', 'skipOnError' => true, 'targetClass' => FormaTenencia::className(), 'targetAttribute' => ['FORMA_TENENCIA_COD_FORM_TEN' => 'COD_FORM_TEN']],
         ];
     }
 
@@ -83,6 +96,11 @@ class Planilla extends \yii\db\ActiveRecord
             'DESCRIPCION_AYUDA' => 'Descripción  Ayuda',
             'CENSO_ID_CENSO' => 'Censo  Id  Censo',
             'COD_SALUBRIDAD' => 'Salubridad de la Vivienda',
+            'organizaciones_comunitarias' => '¿Existen organizaciones comunitarias?',
+            'organizaciones_comunitarias_cuales' => '¿Cúales?',
+            'servicio_o_bien' => '¿Qué tipo de bien o servicio le gustaría a usted o a algún miembro de su familia que se generará en la comunidad de acuerdo a sus necesidades?',
+            'principales_potencialidades' => 'En orden de importancia ¿Cúales cree usted que son las principales potencialidades y aspectos ventajosos que tiene su comunidad?',
+            'principales_problemas' => 'En orden de importancia ¿Cúales cree usted que son los principales y problemas de su comunidad?',
 
         ];
     }
@@ -143,14 +161,6 @@ class Planilla extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFormaTViviendas()
-    {
-        return $this->hasMany(FormaTVivienda::className(), ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getPersonaPlanillas()
     {
         return $this->hasMany(PersonaPlanilla::className(), ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']);
@@ -191,6 +201,14 @@ class Planilla extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getFORMATENENCIACODFORMTEN()
+    {
+        return $this->hasOne(FormaTenencia::className(), ['COD_FORM_TEN' => 'FORMA_TENENCIA_COD_FORM_TEN']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getSalubridadViviendas()
     {
         return $this->hasMany(SalubridadVivienda::className(), ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']);
@@ -199,8 +217,9 @@ class Planilla extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getServicioViviendas()
+    public function getServicios()
     {
-        return $this->hasMany(ServicioVivienda::className(), ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']);
+        return $this->hasMany(Servicio::className(), ['COD_SERVICIO' => 'SERVICIO_COD_SERVICIO'])
+            ->viaTable('servicio_vivienda', ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']);
     }
 }
