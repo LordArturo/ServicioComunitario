@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2017 a las 09:03:31
+-- Tiempo de generación: 04-06-2017 a las 08:12:44
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -37,7 +37,13 @@ CREATE TABLE `act_comercial` (
 
 INSERT INTO `act_comercial` (`COD_ACT_COM`, `DESCRIPCION`) VALUES
 (1, 'Dulces'),
-(2, 'Helados');
+(2, 'Helados'),
+(3, 'Empanadas'),
+(4, 'Refrescos'),
+(5, 'Cervezas'),
+(6, 'Malta'),
+(7, 'Hielo'),
+(8, 'Otro');
 
 -- --------------------------------------------------------
 
@@ -46,9 +52,19 @@ INSERT INTO `act_comercial` (`COD_ACT_COM`, `DESCRIPCION`) VALUES
 --
 
 CREATE TABLE `act_com_vivienda` (
-  `ACT_COMERCIAL_COD_ACT_COM` int(11) NOT NULL,
-  `PLANILLA_ID_PLANILLA` int(11) NOT NULL
+  `ACT_COMERCIAL_COD_ACT_COM` int(11) DEFAULT NULL,
+  `PLANILLA_ID_PLANILLA` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `act_com_vivienda`
+--
+
+INSERT INTO `act_com_vivienda` (`ACT_COMERCIAL_COD_ACT_COM`, `PLANILLA_ID_PLANILLA`) VALUES
+(2, 12),
+(3, 12),
+(1, 13),
+(8, 13);
 
 -- --------------------------------------------------------
 
@@ -70,7 +86,16 @@ INSERT INTO `animal` (`COD_ANIMAL`, `NOMBRE_ANIMAL`, `TIPO_ANIMAL_COD_TIPO_ANIMA
 (1, 'perros', 1),
 (2, 'gatos', 1),
 (3, 'moscas', 2),
-(4, 'hormigas', 2);
+(4, 'hormigas', 2),
+(5, 'ratones', 2),
+(6, 'cucarachas', 2),
+(7, 'ciempiés', 2),
+(8, 'otros', 2),
+(9, 'pájaros', 1),
+(10, 'gallinas', 1),
+(11, 'patos', 1),
+(12, 'cochinos', 1),
+(13, 'otros', 1);
 
 -- --------------------------------------------------------
 
@@ -83,6 +108,14 @@ CREATE TABLE `animal_vivienda` (
   `DESCRIPCION` varchar(45) DEFAULT NULL,
   `PLANILLA_ID_PLANILLA` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `animal_vivienda`
+--
+
+INSERT INTO `animal_vivienda` (`ANIMAL_COD_ANIMAL`, `DESCRIPCION`, `PLANILLA_ID_PLANILLA`) VALUES
+(9, NULL, 12),
+(4, NULL, 12);
 
 -- --------------------------------------------------------
 
@@ -101,12 +134,8 @@ CREATE TABLE `calle` (
 --
 
 INSERT INTO `calle` (`NRO_CALLE`, `NOMBRE_CALLE`, `SECTOR_COD_SECTOR`) VALUES
-(1, '54645', 2),
-(2, '', NULL),
-(3, '', NULL),
-(4, '', 1),
-(5, '', NULL),
-(6, '', NULL);
+(7, 'calle 25', 1),
+(8, 'asfsdfdsfsdf', 2);
 
 -- --------------------------------------------------------
 
@@ -130,7 +159,20 @@ INSERT INTO `caracteristica` (`COD_CARACT_VIVIENDA`, `DESCRIPCION`, `TIPO_CARACT
 (3, 'platabanda', 3),
 (4, 'asbesto', 3),
 (5, 'sala', 1),
-(6, 'comedor', 1);
+(6, 'comedor', 1),
+(7, 'cocina', 1),
+(8, 'baño', 1),
+(9, 'tablas', 2),
+(10, 'bahareque o adobe', 2),
+(11, 'zinc', 2),
+(12, 'catón de piedra', 2),
+(13, 'otro', 2),
+(14, 'tejas', 3),
+(15, 'madera', 3),
+(16, 'zinc', 3),
+(17, 'machihembrado', 3),
+(18, 'raso', 3),
+(19, 'otro', 3);
 
 -- --------------------------------------------------------
 
@@ -148,10 +190,12 @@ CREATE TABLE `caract_vivienda` (
 --
 
 INSERT INTO `caract_vivienda` (`CARACTERISTICA_COD_CARACT_VIVIENDA`, `PLANILLA_ID_PLANILLA`) VALUES
-(1, 10),
-(3, 10),
-(1, 11),
-(3, 11);
+(5, 12),
+(8, 12),
+(10, 12),
+(17, 12),
+(11, 13),
+(16, 13);
 
 -- --------------------------------------------------------
 
@@ -190,7 +234,16 @@ CREATE TABLE `enfermedad` (
 
 INSERT INTO `enfermedad` (`COD_ENF`, `DESCRIPCION`) VALUES
 (1, 'cáncer'),
-(2, 'diabetes');
+(2, 'diabetes'),
+(3, 'sida'),
+(4, 'corazón'),
+(5, 'hepatitis'),
+(6, 'leucemia'),
+(7, 'epilepsia'),
+(8, 'tubérculos'),
+(9, 'hipertensión'),
+(10, 'asma'),
+(11, 'otras');
 
 -- --------------------------------------------------------
 
@@ -202,6 +255,14 @@ CREATE TABLE `enfermedad_planilla` (
   `PLANILLA_ID_PLANILLA` int(11) NOT NULL,
   `ENFERMEDAD_COD_ENF` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `enfermedad_planilla`
+--
+
+INSERT INTO `enfermedad_planilla` (`PLANILLA_ID_PLANILLA`, `ENFERMEDAD_COD_ENF`) VALUES
+(12, 4),
+(12, 5);
 
 -- --------------------------------------------------------
 
@@ -220,7 +281,16 @@ CREATE TABLE `enseres` (
 
 INSERT INTO `enseres` (`COD_ENSERES`, `DESCRIPCION`) VALUES
 (1, 'nevera'),
-(2, 'cocina');
+(2, 'cocina'),
+(3, 'gabinetes'),
+(4, 'camas'),
+(5, 'aire acondicionado'),
+(6, 'ventilador'),
+(7, 'juego de comedor'),
+(8, 'muebles de sala'),
+(9, 'utensilios de cocina'),
+(10, 'tv'),
+(11, 'otros');
 
 -- --------------------------------------------------------
 
@@ -232,6 +302,15 @@ CREATE TABLE `enseres_vivienda` (
   `ENSERES_COD_ENSERES` int(11) NOT NULL,
   `PLANILLA_ID_PLANILLA` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `enseres_vivienda`
+--
+
+INSERT INTO `enseres_vivienda` (`ENSERES_COD_ENSERES`, `PLANILLA_ID_PLANILLA`) VALUES
+(2, 12),
+(8, 12),
+(2, 13);
 
 -- --------------------------------------------------------
 
@@ -272,7 +351,11 @@ CREATE TABLE `exclusion` (
 
 INSERT INTO `exclusion` (`COD_EXCLUSION`, `NOMBRE`) VALUES
 (1, 'Niños de la calle'),
-(2, 'Indigentes');
+(2, 'Indigentes'),
+(3, 'Enfermos terminales'),
+(4, 'Discapacitados'),
+(5, 'Tercera edad'),
+(6, 'Otros');
 
 -- --------------------------------------------------------
 
@@ -285,6 +368,14 @@ CREATE TABLE `exclusion_planilla` (
   `PLANILLA_ID_PLANILLA` int(11) NOT NULL,
   `EXCLUSION_COD_EXCLUSION` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `exclusion_planilla`
+--
+
+INSERT INTO `exclusion_planilla` (`CANTIDAD`, `PLANILLA_ID_PLANILLA`, `EXCLUSION_COD_EXCLUSION`) VALUES
+(12, 12, 1),
+(12, 12, 4);
 
 -- --------------------------------------------------------
 
@@ -303,7 +394,12 @@ CREATE TABLE `forma_tenencia` (
 
 INSERT INTO `forma_tenencia` (`COD_FORM_TEN`, `DESCRIPCION`) VALUES
 (1, 'Propia'),
-(2, 'Alquilada');
+(2, 'Alquilada'),
+(3, 'Compartida'),
+(4, 'Invadida'),
+(5, 'Traspasada'),
+(6, 'Prestada'),
+(7, 'Otra');
 
 -- --------------------------------------------------------
 
@@ -415,35 +511,10 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`CEDULA`, `APELLIDOS`, `NOMBRES`, `TELEF_CELULAR`, `TELEF_HAB`, `GENERO_COD_GENERO`, `ID_PERSONA`, `FECHA_NACIMIENTO`) VALUES
-(NULL, '', '', '', '', NULL, 33, NULL),
-(NULL, '', '', '', '', NULL, 34, NULL),
-(NULL, '', '', '', '', NULL, 35, NULL),
-(NULL, '', '', '', '', NULL, 36, NULL),
-(NULL, '', '', '', '', NULL, 37, NULL),
-(NULL, '', '', '', '', NULL, 38, NULL),
-(NULL, '', '', '', '', NULL, 39, NULL),
-(NULL, '', '', '', '', NULL, 40, NULL),
-(NULL, '', '', '', '', NULL, 41, NULL),
-(NULL, '', '', '', '', NULL, 42, NULL),
-(NULL, '', '', '', '', NULL, 43, NULL),
-(NULL, '', '', '', '', NULL, 44, NULL),
-(NULL, '', '', '', '', NULL, 45, NULL),
-(NULL, '', '', '', '', 1, 46, NULL),
-(NULL, '', '', '', '', NULL, 47, NULL),
-(NULL, '', '', '', '', NULL, 48, NULL),
-(NULL, '', '', '', '', NULL, 49, NULL),
-(NULL, '', '', '', '', NULL, 50, NULL),
-(NULL, '', '', '', '', NULL, 51, NULL),
-(NULL, '', '', '', '', NULL, 52, NULL),
-(NULL, '', '', '', '', NULL, 53, NULL),
-(NULL, '', '', '', '', NULL, 54, NULL),
-(NULL, '', '', '', '', NULL, 55, NULL),
-(NULL, '', '', '', '', NULL, 56, NULL),
-(NULL, '', '', '', '', NULL, 57, NULL),
-(NULL, '', '', '', '', NULL, 58, NULL),
-(NULL, '', '', '', '', NULL, 59, NULL),
-(NULL, '', '', '', '', NULL, 60, NULL),
-(NULL, '', '', '', '', NULL, 61, NULL);
+(19925695, 'Bernal', 'Arturo', '43242543', '', 1, 62, '1992-06-22'),
+(21341880, 'Bernal', 'Raul', NULL, NULL, 1, 63, '2017-06-14'),
+(21341881, 'Bernal', 'Julio', NULL, NULL, 1, 64, '2017-06-22'),
+(423423, 'sdfsd', 'sdf', '534534543', '', 1, 65, '2017-06-15');
 
 -- --------------------------------------------------------
 
@@ -472,8 +543,10 @@ CREATE TABLE `persona_planilla` (
 --
 
 INSERT INTO `persona_planilla` (`PLANILLA_ID_PLANILLA`, `PERSONA_ID_PERSONA`, `CORREO`, `ESTADO_CIVIL_COD_EST_CIV`, `NIVEL_INSTRUCCION_COD_NIV_INST`, `PROFESION_COD_PROFESION`, `TRABAJA`, `TIPO_TRABAJO_COD_TIP_TRAB`, `INGRESO`, `JEFE_FAMILIA`, `PARENTESCO_COD_PARENTESCO`, `ACTIVISTA_COMUNAL`, `ID`) VALUES
-(10, 59, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 9),
-(11, 61, '', NULL, NULL, NULL, 1, NULL, NULL, 1, NULL, NULL, 10);
+(12, 62, 'arturo@arutro.cm', 1, 3, 2, 0, 4, 100000, 1, NULL, 1, 11),
+(12, 63, NULL, NULL, 4, 3, NULL, NULL, 20000, NULL, 1, NULL, 12),
+(12, 64, NULL, NULL, 7, 4, NULL, NULL, 20000, NULL, 1, NULL, 13),
+(13, 65, '', 3, 2, 3, 0, 5, 5345345, 1, NULL, 1, 14);
 
 -- --------------------------------------------------------
 
@@ -508,8 +581,8 @@ CREATE TABLE `planilla` (
 --
 
 INSERT INTO `planilla` (`NRO_PLANILLA`, `FECHA`, `VIVIENDA_COD_VIVIENDA`, `ID_PLANILLA`, `INGRESOS_CLASIF_COD_ING_FAM`, `NUMERO_FAMILIAS`, `OBSERVACIONES`, `OCV`, `CANT_HAB`, `AYUDA`, `DESCRIPCION_AYUDA`, `CENSO_ID_CENSO`, `COD_SALUBRIDAD`, `organizaciones_comunitarias`, `organizaciones_comunitarias_cuales`, `servicio_o_bien`, `principales_potencialidades`, `principales_problemas`, `FORMA_TENENCIA_COD_FORM_TEN`) VALUES
-(543534, '2017-06-22', 59, 10, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL),
-(535, NULL, 61, 11, 1, NULL, '', NULL, NULL, NULL, '', 1, NULL, NULL, '', '', '', '', NULL);
+(12, '2017-06-20', 62, 12, 4, 2, 'nada aún', 0, 34, 0, 'njo', 2, 3, 0, 'dfs', 'si', 'no', 'si', 5),
+(45, '2017-06-21', 63, 13, 4, 2, 'ffsfsd', 1, 34, 1, 'gfdsfsd', 2, 2, 1, '', '', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -589,7 +662,76 @@ INSERT INTO `servicio` (`COD_SERVICIO`, `DESCRIPCION`, `TIPO_SERVICIO_COD_TIPO_S
 (1, 'Acueducto', 1),
 (2, 'Camión', 1),
 (3, 'Cloacas', 2),
-(4, 'Pozo séptico', 2);
+(4, 'Pozo séptico', 2),
+(5, 'Pila pública', 1),
+(6, 'Del río', 1),
+(7, 'Otros', 1),
+(8, 'Letrinas', 2),
+(9, 'Al aire libre', 2),
+(10, 'Depositada en bolsas', 2),
+(11, 'Otros', 2),
+(12, 'Bombona', 3),
+(13, 'Tubería', 3),
+(14, 'No posee', 3),
+(15, 'Electrificado público', 4),
+(16, 'Planta eléctrica propia', 4),
+(17, 'No tiene', 4),
+(18, 'Tiene medidor', 4),
+(19, 'Aseo urbano', 5),
+(20, 'Container', 5),
+(21, 'Bajantes', 5),
+(22, 'Camión', 5),
+(23, 'Al aire libre', 5),
+(24, 'Quemada', 5),
+(25, 'Otros', 5),
+(26, 'Domiciliaria', 6),
+(27, 'Celular', 6),
+(28, 'Prepago', 6),
+(29, 'Centro de conexión', 6),
+(30, 'No posee', 6),
+(31, 'Otros', 6),
+(32, 'Propio', 7),
+(33, 'Público', 7),
+(34, 'Bestias', 7),
+(35, 'Otros', 7),
+(36, 'Televisión', 8),
+(37, 'Radio', 8),
+(38, 'Prensa', 8),
+(39, 'Internet', 8),
+(40, 'Medios alternativos comunitarios', 8),
+(41, 'Otros', 8),
+(42, 'Mercado', 9),
+(43, 'Abastos', 9),
+(44, 'Bodega', 9),
+(45, 'Farmacia', 9),
+(46, 'Plazas y parques', 9),
+(47, 'Preescolar', 9),
+(48, 'Escuelas', 9),
+(49, 'Liceos', 9),
+(50, 'Centro de salud', 9),
+(51, 'Canchas', 9),
+(52, 'Casa comunal', 9),
+(53, 'Iglesias', 9),
+(54, 'Otros', 9),
+(55, 'Ribas', 10),
+(56, 'Sucre', 10),
+(57, 'Vuelvan caras', 10),
+(58, 'Identidad', 10),
+(59, 'Barrio adentro', 10),
+(60, 'Mercal', 10),
+(61, 'Ezequiel Zamora', 10),
+(62, 'Otros', 10),
+(63, 'Contraloría seguimiento', 11),
+(64, 'Relaciones públicas y medios', 11),
+(65, 'Seguridad ciudadana', 11),
+(66, 'Infraestructura y servicios públicos', 11),
+(67, 'Formación y conciencia ideológica', 11),
+(68, 'Elaboración de proyectos comunitarios', 11),
+(69, 'Alimentación y nutrición', 11),
+(70, 'Educación, cultura y tecnología', 11),
+(71, 'Salud, deporte y saneamiento ambiental', 11),
+(72, 'Ejecución de programas sociales y misiones', 11),
+(73, 'Otros', 11);
 
 -- --------------------------------------------------------
 
@@ -601,6 +743,24 @@ CREATE TABLE `servicio_vivienda` (
   `SERVICIO_COD_SERVICIO` int(11) NOT NULL,
   `PLANILLA_ID_PLANILLA` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `servicio_vivienda`
+--
+
+INSERT INTO `servicio_vivienda` (`SERVICIO_COD_SERVICIO`, `PLANILLA_ID_PLANILLA`) VALUES
+(5, 12),
+(8, 12),
+(14, 12),
+(15, 12),
+(19, 12),
+(27, 12),
+(33, 12),
+(41, 12),
+(42, 12),
+(61, 12),
+(68, 12),
+(71, 12);
 
 -- --------------------------------------------------------
 
@@ -658,7 +818,10 @@ CREATE TABLE `tipo_salubridad` (
 
 INSERT INTO `tipo_salubridad` (`COD_TIPO_SALUBRIDAD`, `DESCRIPCION`) VALUES
 (1, 'limpia'),
-(2, 'sucia');
+(2, 'sucia'),
+(3, 'medianamente limpia'),
+(4, 'medianamente sucia'),
+(5, 'otro');
 
 -- --------------------------------------------------------
 
@@ -677,7 +840,16 @@ CREATE TABLE `tipo_servicio` (
 
 INSERT INTO `tipo_servicio` (`COD_TIPO_SERV`, `DESCRIPCION`) VALUES
 (1, 'Aguas blancas'),
-(2, 'Aguas servidas');
+(2, 'Aguas servidas'),
+(3, 'Gas'),
+(4, 'Sistema eléctrico'),
+(5, 'Recolección de basuras'),
+(6, 'Telefonía'),
+(7, 'Transporte'),
+(8, 'Mecanismos de información'),
+(9, 'Servicios comunales'),
+(10, '¿Cuáles misiones se están implementando?'),
+(11, '¿En cuál vocería le gustaría participar?');
 
 -- --------------------------------------------------------
 
@@ -696,7 +868,11 @@ CREATE TABLE `tipo_trabajo` (
 
 INSERT INTO `tipo_trabajo` (`COD_TIP_TRAB`, `DESCRIPCION`) VALUES
 (1, 'Pública'),
-(2, 'Privada');
+(2, 'Privada'),
+(3, 'Comercial'),
+(4, 'Por cuenta propia'),
+(5, 'Buhonería'),
+(6, 'Otro');
 
 -- --------------------------------------------------------
 
@@ -715,7 +891,12 @@ CREATE TABLE `tipo_vivienda` (
 
 INSERT INTO `tipo_vivienda` (`COD_TIPO_VIVIENDA`, `DESCRIPCION`) VALUES
 (1, 'Quinta'),
-(2, 'Casa');
+(2, 'Casa'),
+(3, 'Apartamento'),
+(4, 'Rancho'),
+(5, 'Barranco'),
+(6, 'Habitación o anexo'),
+(7, 'Otro');
 
 -- --------------------------------------------------------
 
@@ -758,14 +939,8 @@ CREATE TABLE `vivienda` (
 --
 
 INSERT INTO `vivienda` (`COD_VIVIENDA`, `DESCRIPCION`, `TIPO_VIVIENDA_COD_TIPO_VIVIENDA`, `CALLE_NRO_CALLE`) VALUES
-(54, NULL, NULL, NULL),
-(55, NULL, NULL, NULL),
-(56, NULL, NULL, 1),
-(57, NULL, NULL, 2),
-(58, NULL, NULL, 3),
-(59, NULL, NULL, 4),
-(60, NULL, NULL, 5),
-(61, NULL, NULL, 6);
+(62, NULL, 4, 7),
+(63, NULL, NULL, 8);
 
 --
 -- Índices para tablas volcadas
@@ -1022,22 +1197,22 @@ ALTER TABLE `vivienda`
 -- AUTO_INCREMENT de la tabla `act_comercial`
 --
 ALTER TABLE `act_comercial`
-  MODIFY `COD_ACT_COM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_ACT_COM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `animal`
 --
 ALTER TABLE `animal`
-  MODIFY `COD_ANIMAL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `COD_ANIMAL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `calle`
 --
 ALTER TABLE `calle`
-  MODIFY `NRO_CALLE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `NRO_CALLE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `caracteristica`
 --
 ALTER TABLE `caracteristica`
-  MODIFY `COD_CARACT_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `COD_CARACT_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `censo`
 --
@@ -1047,12 +1222,12 @@ ALTER TABLE `censo`
 -- AUTO_INCREMENT de la tabla `enfermedad`
 --
 ALTER TABLE `enfermedad`
-  MODIFY `COD_ENF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_ENF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `enseres`
 --
 ALTER TABLE `enseres`
-  MODIFY `COD_ENSERES` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_ENSERES` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `estado_civil`
 --
@@ -1062,12 +1237,12 @@ ALTER TABLE `estado_civil`
 -- AUTO_INCREMENT de la tabla `exclusion`
 --
 ALTER TABLE `exclusion`
-  MODIFY `COD_EXCLUSION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_EXCLUSION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `forma_tenencia`
 --
 ALTER TABLE `forma_tenencia`
-  MODIFY `COD_FORM_TEN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_FORM_TEN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `genero`
 --
@@ -1092,17 +1267,17 @@ ALTER TABLE `parentesco`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `ID_PERSONA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `ID_PERSONA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT de la tabla `persona_planilla`
 --
 ALTER TABLE `persona_planilla`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `planilla`
 --
 ALTER TABLE `planilla`
-  MODIFY `ID_PLANILLA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID_PLANILLA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `profesion`
 --
@@ -1122,7 +1297,7 @@ ALTER TABLE `sector`
 -- AUTO_INCREMENT de la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  MODIFY `COD_SERVICIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `COD_SERVICIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT de la tabla `tipo_animal`
 --
@@ -1137,22 +1312,22 @@ ALTER TABLE `tipo_caracteristica`
 -- AUTO_INCREMENT de la tabla `tipo_salubridad`
 --
 ALTER TABLE `tipo_salubridad`
-  MODIFY `COD_TIPO_SALUBRIDAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_TIPO_SALUBRIDAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tipo_servicio`
 --
 ALTER TABLE `tipo_servicio`
-  MODIFY `COD_TIPO_SERV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_TIPO_SERV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `tipo_trabajo`
 --
 ALTER TABLE `tipo_trabajo`
-  MODIFY `COD_TIP_TRAB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_TIP_TRAB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tipo_vivienda`
 --
 ALTER TABLE `tipo_vivienda`
-  MODIFY `COD_TIPO_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `COD_TIPO_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -1162,7 +1337,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `vivienda`
 --
 ALTER TABLE `vivienda`
-  MODIFY `COD_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `COD_VIVIENDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- Restricciones para tablas volcadas
 --

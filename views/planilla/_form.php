@@ -1,8 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-//use yii\bootstrap\ActiveForm;
+//use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 use yii\helpers\ArrayHelper;
 use app\models\Censo;
@@ -27,8 +27,8 @@ use app\models\Sector;
 
     <?php $form = ActiveForm::begin([
         //'layout' => 'horizontal',
-        /*'fieldConfig' => [
-            'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+        'fieldConfig' => [//"{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}"
+            'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{endWrapper}",
             'horizontalCssClasses' => [
                 'label' => 'col-sm-4',
                 'offset' => '',//col-sm-offset-4
@@ -36,7 +36,7 @@ use app\models\Sector;
                 'error' => '',
                 'hint' => '',
             ],
-        ]*/
+        ]
     ]); ?>
 
     <!-- 
@@ -53,7 +53,7 @@ use app\models\Sector;
             
         </div>
         <div class="col-md-4">
-        <?= $form->field($model, 'NRO_PLANILLA')->textInput(/*['class' => 'col-md-6']*/) ?>
+        <?= $form->field($model, 'NRO_PLANILLA')->textInput(['maxlength' => true, 'type' => 'number']/*['class' => 'col-md-6']*/) ?>
             
         </div>
         <div class="col-md-4">
@@ -94,7 +94,7 @@ use app\models\Sector;
         <?= $form->field($persona, 'APELLIDOS')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-4"> 
-        <?= $form->field($persona, 'CEDULA')->textInput(['maxlength' => true]) ?> 
+        <?= $form->field($persona, 'CEDULA')->textInput(['maxlength' => true, 'type' => 'number']) ?> 
         </div>
         <div class="col-md-4"> 
         <?= $form->field($persona, 'FECHA_NACIMIENTO')->widget(\yii\jui\DatePicker::classname(), [
@@ -149,7 +149,7 @@ use app\models\Sector;
       ) ?>
         </div>
         <div class="col-md-4">
-        <?= $form->field($personaPlanilla, 'INGRESO')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($personaPlanilla, 'INGRESO')->textInput(['maxlength' => true, 'type' => 'number']) ?>
         </div>
 
 
@@ -157,7 +157,7 @@ use app\models\Sector;
         <h2>Características del grupo familiar</h2>
         </div>
         <div class="col-md-4">
-        <?= $form->field($model, 'NUMERO_FAMILIAS')->textInput() ?>
+        <?= $form->field($model, 'NUMERO_FAMILIAS')->textInput(['maxlength' => true, 'type' => 'number']) ?>
         </div>
 
 
@@ -174,10 +174,10 @@ use app\models\Sector;
             <th class="text-center" style="min-width: 150px;">Nombres</th>
             <th class="text-center" style="min-width: 150px;">Apellidos</th>
             <th class="text-center" style="min-width: 100px;">Sexo</th>
-            <th class="text-center" style="min-width: 100px;">Cédula</th>
+            <th class="text-center" style="min-width: 150px;">Cédula</th>
             <th class="text-center" style="min-width: 200px;">Fecha de Nacimiento</th>
             <th class="text-center" style="min-width: 100px;">Parentesco</th>
-            <th class="text-center" style="min-width: 100px;">Ingreso</th>
+            <th class="text-center" style="min-width: 120px;">Ingreso</th>
             <th class="text-center" style="min-width: 200px;">Nivel de Instrucción</th>
             <th class="text-center" style="min-width: 100px;">Profesión</th>
         </tr>
@@ -196,10 +196,13 @@ use app\models\Sector;
                 )->label('') ?>
             </td>
             <td>
-                <?= $form->field($personas[$i], '['.$i.']CEDULA')->textInput(['maxlength' => true])->label('') ?>
+                <?= $form->field($personas[$i], '['.$i.']CEDULA')->textInput(['maxlength' => true, 'type' => 'number'])->label('') ?>
             </td>
             <td class="col-sm-2">
-                <?= $form->field($personas[$i], '['.$i.']FECHA_NACIMIENTO')->textInput(['maxlength' => true])->label('') ?>
+                <?= $form->field($personas[$i], '['.$i.']FECHA_NACIMIENTO')->widget(\yii\jui\DatePicker::classname(), [
+                'options' => ['class' => 'form-control'],
+                'clientOptions' => ['dateFormat' => 'yy-mm-dd']
+                ])->label('') ?>
             </td>
             <td>
                 <?= $form->field($personaPlanillas[$i], '['.$i.']PARENTESCO_COD_PARENTESCO')->dropDownList(
@@ -208,7 +211,7 @@ use app\models\Sector;
                 )->label('') ?>
             </td>
             <td>
-                <?= $form->field($personaPlanillas[$i], '['.$i.']INGRESO')->textInput(['maxlength' => true])->label('') ?>
+                <?= $form->field($personaPlanillas[$i], '['.$i.']INGRESO')->textInput(['maxlength' => true, 'type' => 'number'])->label('') ?>
             </td>
             <td>
                 <?= $form->field($personaPlanillas[$i], '['.$i.']NIVEL_INSTRUCCION_COD_NIV_INST')->dropDownList(
@@ -230,179 +233,224 @@ use app\models\Sector;
     </div>
 
 
-
-        <div class="col-md-4">
+        <div class="col-md-12" style="margin-top: 10px;">
+        <?= $form->field($model, 'OBSERVACIONES')->textarea(['rows' => '6']) ?>
         </div>
         <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
-
-
-
-     
-    
-    
-    
-     
-    
-
-     
-    
-
-    
-    
-     
-
-    
-
-    
-
-
-    </div>
-    
-
-
-
-    
-
-
-    
-
-    <?= $form->field($model, 'OBSERVACIONES')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($personaPlanilla, 'TIPO_TRABAJO_COD_TIP_TRAB')->dropDownList(
+        <?= $form->field($personaPlanilla, 'TIPO_TRABAJO_COD_TIP_TRAB')->dropDownList(
             ArrayHelper::map(TipoTrabajo::find()->all(),'COD_TIP_TRAB','DESCRIPCION'),
             ['prompt'=>'Seleccione tipo de trabajo']
       ) ?>
-
-    <!--
+        </div>
+        <div class="col-md-12">
+        <!--
       Actividad Comercial
     --> 
-    Actividad Comercial
+    <h4 style="display: inline;">Actividad Comercial: </h4>
+    
     <?php foreach ($actividadComercial as $actividad) {?>
-        <div>
+        <div style="display: inline; margin-left: 5px;">
             <?= $actividad->DESCRIPCION ?>
-            <input type="checkbox" name="actividadComercial<?= $actividad->COD_ACT_COM ?>">
+            <?php 
+                $text=''; 
+                if(in_array($actividad, $model->actividadComercial))
+                    $text = 'checked'; ?>
+            <input type="checkbox" name="actividadComercial<?= $actividad->COD_ACT_COM ?>" <?= $text ?>>
         </div>
     <?php } ?>
-
-    <div>Aquí va la vivienda</div> 
-    <!--
+        </div>
+        <div class="col-md-12">
+        <h2>Características de la vivienda</h2> 
+        </div>
+        <div class="col-md-4">
+        <!--
     <?= $form->field($vivienda, 'DESCRIPCION')->textInput(['maxlength' => true]) ?>  
     -->
     <?= $form->field($vivienda, 'TIPO_VIVIENDA_COD_TIPO_VIVIENDA')->dropDownList(
             ArrayHelper::map(TipoVivienda::find()->all(),'COD_TIPO_VIVIENDA','DESCRIPCION'),
             ['prompt'=>'Seleccione Tipo de Vivienda']
       ) ?>
-
-    <!--
+        </div>
+        <div class="col-md-4">
+        <!--
       Forma Tenencia Vivienda
     --> 
     <?= $form->field($model, 'FORMA_TENENCIA_COD_FORM_TEN')->dropDownList(
             ArrayHelper::map(FormaTenencia::find()->all(),'COD_FORM_TEN','DESCRIPCION'),
             ['prompt'=>'Seleccione Tipo de Tenencia de la Vivienda']
       ) ?>
-
-    <?= $form->field($model, 'OCV')->textInput() ?>
-
+        </div>
+        <div class="col-md-4">
+        <?= $form->field($model, 'OCV')->dropDownList(
+            ['1' => 'Sí', '0' => 'No']
+            //['prompt'=>'Trabaja']
+        ) ?>
+        </div>
 
     <!--
       Características Vivienda
     --> 
-    Características
     <?php foreach ($tiposCaracteristicas as $tipo) {?>
-        <div>
-            <?= $tipo->DESCRIPCION ?>
-            
+    <?php if($tipo->DESCRIPCION == "Habitaciones de vivienda") {?>
+        <div class="col-md-12">
+    <?php }else{?>
+    <div class="col-md-4" style="margin-top: 5px;">
+    <?php }?>
+        <label style="display: inline;"><?= $tipo->DESCRIPCION ?>: </label>
             <?php if($tipo->DESCRIPCION == "Habitaciones de vivienda") {?>
 
                 <?php foreach ($tipo->caracteristicas as $caracteristica) {?>
-                    <div>
+                
+                <?php 
+                $text=''; 
+                if(in_array($caracteristica, $model->caracteristicas))
+                    $text = 'checked'; ?>
+
+                    <div style="display: inline; margin-left: 5px;">
                         <?= $caracteristica->DESCRIPCION ?>
-                        <input type="checkbox" name="caracteristica<?= $caracteristica->COD_CARACT_VIVIENDA ?>">
+                        <input type="checkbox" name="caracteristica<?= $caracteristica->COD_CARACT_VIVIENDA ?>" <?= $text ?>>
                     </div>
                 <?php } ?>
 
             <?php }else{ ?>
-
-                <select name="tiposCaracteristica<?= $tipo->COD_CARACTERISTICA ?>">
+                <div>
+                <select class="form-control" name="tiposCaracteristica<?= $tipo->COD_CARACTERISTICA ?>">
                 <?php foreach ($tipo->caracteristicas as $caracteristica) { ?>
-                    <option value="<?= $caracteristica->COD_CARACT_VIVIENDA ?>"><?= $caracteristica->DESCRIPCION ?></option>
+
+                <?php 
+                $text=''; 
+                if(in_array($caracteristica, $model->caracteristicas))
+                    $text = 'selected'; ?>
+
+                    <option value="<?= $caracteristica->COD_CARACT_VIVIENDA ?>" <?= $text ?>><?= $caracteristica->DESCRIPCION ?></option>
                 <?php } ?>
                 </select>
+            </div>
 
             <?php }?>
         </div>
     <?php } ?>
-    <?= $form->field($model, 'CANT_HAB')->textInput() ?>
-
-    <!--
+        <div class="col-md-4">
+        <?= $form->field($model, 'CANT_HAB')->textInput(['maxlength' => true, 'type' => 'number']) ?>
+        </div>
+        <div class="col-md-12">
+        <!--
       Enseres de la vivienda
     --> 
-    Enseres de la vivienda
+    <label style="display: inline;">Enseres de la vivienda: </label>
+    
     <?php foreach ($enseres as $enser) {?>
-        <div>
+            <?php 
+                $text=''; 
+                if(in_array($enser, $model->enseres))
+                    $text = 'checked'; ?>
+
+        <div style="display: inline; margin-left: 5px;">
             <?= $enser->DESCRIPCION ?>
-            <input type="checkbox" name="enser<?= $enser->COD_ENSERES ?>">
+            <input type="checkbox" name="enser<?= $enser->COD_ENSERES ?>" <?= $text ?>>
         </div>
     <?php } ?>
-
-    <!--
+        </div>
+        <div class="col-md-4" style="margin-top: 10px;">
+        <!--
       Salubridad de la vivienda
     --> 
     <?= $form->field($model, 'COD_SALUBRIDAD')->dropDownList(
             ArrayHelper::map(TipoSalubridad::find()->all(),'COD_TIPO_SALUBRIDAD','DESCRIPCION'),
             ['prompt'=>'Seleccione Salubridad']
       ) ?>
+        </div>
 
-    <!--
+        
+         <!--
       Animales domesticos o insectos y roedores
     --> 
-
-    Animales
     <?php foreach ($tipoAnimales as $tipo) {?>
-        <div>
-            <?= $tipo->NOMBRE ?>
+        <div class="col-md-12">
+        <label style="display: inline;"><?= $tipo->NOMBRE ?>: </label>
             <?php foreach ($tipo->animals as $animal) {?>
-                <div>
+
+            <?php 
+                $text=''; 
+                if(in_array($animal, $model->animales))
+                    $text = 'checked'; ?>
+
+                <div style="display: inline; margin-left: 5px;">
                     <?= $animal->NOMBRE_ANIMAL ?>
-                    <input type="checkbox" name="animal<?= $animal->COD_ANIMAL ?>">
+                    <input type="checkbox" name="animal<?= $animal->COD_ANIMAL ?>" <?= $text ?>>
                 </div>
             <?php } ?>
         </div>
     <?php } ?>
 
+    <div class="col-md-12"> 
+        <h2>Salud y servicios</h2>
+    </div>
+
+    <div class="col-md-12">
     <!--
       Enfermedades
     --> 
-    Enfermedades
+
+    <label style="display: inline;">Salud: </label>
     <?php foreach ($enfermedades as $enfermedad) {?>
-        <div>
+            
+            <?php 
+                $text=''; 
+                if(in_array($enfermedad, $model->enfermedades))
+                    $text = 'checked'; ?>
+
+        <div style="display: inline; margin-left: 5px;">
             <?= $enfermedad->DESCRIPCION ?>
-            <input type="checkbox" name="enfermedad<?= $enfermedad->COD_ENF ?>">
+            <input type="checkbox" name="enfermedad<?= $enfermedad->COD_ENF ?>" <?= $text ?>>
         </div>
     <?php } ?>
+        </div>
 
-    <?= $form->field($model, 'AYUDA')->textInput() ?>
+        <div class="col-md-4" style="margin-top: 5px;">
+        <?= $form->field($model, 'AYUDA')->dropDownList(
+            ['1' => 'Sí', '0' => 'No']
+            //['prompt'=>'Trabaja']
+        ) ?>
+        </div>
+        <div class="col-md-12">
+        <?= $form->field($model, 'DESCRIPCION_AYUDA')->textarea(['rows' => '5']) ?>
+        </div>
 
-    <?= $form->field($model, 'DESCRIPCION_AYUDA')->textInput(['maxlength' => true]) ?>
 
+        <div class="col-md-12"> 
+            <h4>Situación de exclusión</h4>
+        </div>
 
-    <!--
+        <!--
       Exclusión
     --> 
-    Situación de exclusión
+    
     <?php foreach ($exclusiones as $exclusion) {?>
-        <div>
+            
+            <?php 
+                $text=''; 
+                $value = 0;
+                if(in_array($exclusion, $model->exclusiones)){
+                    $text = 'checked'; 
+                    foreach ($model->exclusionPlanillas as $ex) {
+                        if($ex->EXCLUSION_COD_EXCLUSION == $exclusion->COD_EXCLUSION)
+                            $value = $ex->CANTIDAD;
+                    }
+                }
+
+            ?>
+        
+        <div class="col-md-12">
+        <div class="col-md-5">
             <?= $exclusion->NOMBRE ?>
-            <input type="checkbox" name="exclusion<?= $exclusion->COD_EXCLUSION ?>">
-            Cuantos
-            <input type="number" name="exclusionCantidad<?= $exclusion->COD_EXCLUSION ?>" value="0">
+            <input type="checkbox" name="exclusion<?= $exclusion->COD_EXCLUSION ?>" <?= $text ?>>
+            ¿Cuantos?
+
+            </div>
+            <div class="col-md-4">
+            <input type="number" class="form-control" name="exclusionCantidad<?= $exclusion->COD_EXCLUSION ?>" value="<?= $value ?>">
+            </div>
         </div>
     <?php } ?>
 
@@ -410,15 +458,23 @@ use app\models\Sector;
     <!--
       Servicios de la vivienda e incluído parte de servicios comunales
     --> 
-
-    Servicios
+    <div class="col-md-12"> 
+        <h4>Servicios</h4>
+    </div>
+    
     <?php foreach ($tipoServicios as $tipo) {?>
-        <div>
-            <?= $tipo->DESCRIPCION ?>
+        <div class="col-md-12">
+            <label style="display: inline;"><?= $tipo->DESCRIPCION ?>: </label>
             <?php foreach ($tipo->servicios as $servicio) {?>
-                <div>
+            
+            <?php 
+                $text=''; 
+                if(in_array($servicio, $model->servicios))
+                    $text = 'checked'; ?>
+
+                <div style="display: inline; margin-left: 5px;">
                     <?= $servicio->DESCRIPCION ?>
-                    <input type="checkbox" name="servicio<?= $servicio->COD_SERVICIO ?>">
+                    <input type="checkbox" name="servicio<?= $servicio->COD_SERVICIO ?>" <?= $text ?>>
                 </div>
             <?php } ?>
         </div>
@@ -428,19 +484,57 @@ use app\models\Sector;
       Participación comunitaria y situación de la comunidad
     --> 
 
-    <?= $form->field($model, 'organizaciones_comunitarias')->textInput() ?>
+    
 
-    <?= $form->field($model, 'organizaciones_comunitarias_cuales')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'servicio_o_bien')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'principales_potencialidades')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'principales_problemas')->textInput(['maxlength' => true]) ?>
+    
+    
+    
+    
 
-    <?= $form->field($personaPlanilla, 'ACTIVISTA_COMUNAL')->textInput() ?>
+    
+
+        <div class="col-md-6" style="margin-top: 15px;">
+        <?= $form->field($model, 'organizaciones_comunitarias')->dropDownList(
+            ['1' => 'Sí', '0' => 'No']
+            //['prompt'=>'Trabaja']
+        ) ?>
+        </div>
+        <div class="col-md-12">
+        <?= $form->field($model, 'organizaciones_comunitarias_cuales')->textarea(['rows' => '4']) ?>
+        </div>
+        <div class="col-md-12">
+        <?= $form->field($model, 'servicio_o_bien')->textarea(['rows' => '4']) ?>
+        </div>
+        <div class="col-md-12">
+        <?= $form->field($model, 'principales_potencialidades')->textarea(['rows' => '4']) ?>
+        </div>
+        <div class="col-md-12">
+        <?= $form->field($model, 'principales_problemas')->textarea(['rows' => '4']) ?>
+        </div>
+        <div class="col-md-6">
+        <?= $form->field($personaPlanilla, 'ACTIVISTA_COMUNAL')->dropDownList(
+            ['1' => 'Sí', '0' => 'No']
+            //['prompt'=>'Trabaja']
+        ) ?>
+        </div>
+
+    </div>
+    
+
+    
+
+
+    
+
+
+    
+
+    
 
     
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

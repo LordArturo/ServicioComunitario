@@ -33,6 +33,7 @@ use Yii;
  * @property Enfermedad[] $enfermedades
  * @property Enseres[] $enseres
  * @property ExclusionPlanilla[] $exclusionPlanillas
+ * @property Exclusion[] $exclusiones
  * @property FormaTenencia[] $formaTenencias
  * @property PersonaPlanilla[] $personaPlanillas
  * @property Vivienda $vIVIENDACODVIVIENDA
@@ -90,10 +91,11 @@ class Planilla extends \yii\db\ActiveRecord
             'INGRESOS_CLASIF_COD_ING_FAM' => 'Clasificación de ingreso',
             'NUMERO_FAMILIAS' => 'Número de Familias',
             'OBSERVACIONES' => 'Observaciones',
-            'OCV' => 'Ocv',
-            'CANT_HAB' => 'Cant  Hab',
-            'AYUDA' => 'Ayuda',
-            'DESCRIPCION_AYUDA' => 'Descripción  Ayuda',
+            'OCV' => 'Pertenece a una OCV',
+            'CANT_HAB' => 'Cantidad Habitaciones',
+            'AYUDA' => 'Necesita ayuda especial',
+            'DESCRIPCION_AYUDA' => 'Descripción  de la Ayuda',
+            'FORMA_TENENCIA_COD_FORM_TEN' => 'Forma de Vivienda',
             'CENSO_ID_CENSO' => 'Censo',
             'COD_SALUBRIDAD' => 'Salubridad de la Vivienda',
             'organizaciones_comunitarias' => '¿Existen organizaciones comunitarias?',
@@ -156,6 +158,15 @@ class Planilla extends \yii\db\ActiveRecord
     public function getExclusionPlanillas()
     {
         return $this->hasMany(ExclusionPlanilla::className(), ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExclusiones()
+    {
+        return $this->hasMany(Exclusion::className(), ['COD_EXCLUSION' => 'EXCLUSION_COD_EXCLUSION'])
+            ->viaTable('exclusion_planilla', ['PLANILLA_ID_PLANILLA' => 'ID_PLANILLA']);
     }
 
     /**

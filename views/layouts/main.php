@@ -20,8 +20,9 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <?php $this->registerCssFile("/css/style.css"); ?>
+    <?php //$this->registerCssFile("/css/style.css"); ?>
     <link rel="stylesheet" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/css/estilo.css">
+    <script src="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/js/jquery.js"></script>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -208,13 +209,15 @@ AppAsset::register($this);
                     <div class="text-center">
                         <ul class="nav navbar-nav" >
                             <li >
-                                <a class="nav-item" href="#">Home</a>
+                                <a class="nav-item" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/site/">Home</a>
                             </li>
+                            <!--
                             <li >
                                 <a class="nav-item" href="#">Mapa del sitio</a>
                             </li>
+                            -->
                             <li >
-                                <a class="nav-item" href="#">Contacto</a>
+                                <a class="nav-item" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/site/contacto">Contacto</a>
                             </li>
                         </ul>
                     </div>

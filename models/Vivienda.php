@@ -48,7 +48,7 @@ class Vivienda extends \yii\db\ActiveRecord
         return [
             'COD_VIVIENDA' => 'Cod  Vivienda',
             'DESCRIPCION' => 'Descripcion',
-            'TIPO_VIVIENDA_COD_TIPO_VIVIENDA' => 'Tipo  Vivienda  Cod  Tipo  Vivienda',
+            'TIPO_VIVIENDA_COD_TIPO_VIVIENDA' => 'Situación vivienda',
             'CALLE_NRO_CALLE' => 'Calle  Nro  Calle',
         ];
     }
