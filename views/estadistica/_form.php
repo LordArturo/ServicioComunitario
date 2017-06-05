@@ -24,7 +24,9 @@ use app\models\Censo;
 
         <div class="col-md-4">
         <?= $form->field($model, 'NRO_PLANILLA')->dropDownList(
-            ['1' => 'Cantidad personas por estado civil',]
+            ['1' => 'Cantidad personas por estado civil',
+                '2' => 'Cantidad familias por tipo de tenencia vivienda',
+                '3' => 'Cantidad Viviendas por estado de salubridad',]
             //['prompt'=>'Trabaja']
       )->label("Tipo de consulta") ?>
         </div>

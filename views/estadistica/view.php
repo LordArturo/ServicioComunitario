@@ -44,6 +44,7 @@ data.push({
           smooth: true,
           itemStyle: {
             normal: {
+              label : {show: true, position: 'inside'},
 
                 /*color: function(params) {
 
@@ -66,6 +67,25 @@ echartLine = echarts.init(document.getElementById('echart_line'));
       formatter: "{b} = {c}"
       },
       calculable: true,
+      /*legend: {
+                //x: 100,
+                //y: 0,
+                data: ['datosx', 'datosy']
+              },*/
+      toolbox: {
+                 show : true,
+                 feature : {
+                     mark : {show: false},
+                     dataZoom : {show: false},
+                     dataView : {show: false},
+                     magicType : {
+                                   show: true,
+                                   title: {line: 'Línea', bar: 'Barras'},
+                                   type: ['line', 'bar']
+                                },
+                     saveAsImage : {show: true, title: 'Guardar Imagen'}
+                 }
+              },
       //formatter: "{b}",
       //color: ['red',],
       /*
@@ -74,9 +94,26 @@ echartLine = echarts.init(document.getElementById('echart_line'));
       //grid: {y: 20, y2:20, x2:30},
       xAxis: [{
         type: 'category',
+
+            boundaryGap: true,
+        axisLabel : {
+                show:true,
+                interval: 0,    // {number}
+                rotate: 0,
+                margin: 8,
+                formatter: '{value}',
+                textStyle: {
+                    color: 'black',
+                    fontFamily: 'sans-serif',
+                    fontSize: 15,
+                    fontStyle: 'italic',
+                    //fontWeight: 'bold'
+                }
+            },
         //boundaryGap: false,
         data: datosx//xData//trabajar con las fechas reales
-      }],
+      }
+      ],
       yAxis: [{
         type: 'value'
          }],

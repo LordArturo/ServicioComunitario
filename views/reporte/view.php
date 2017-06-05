@@ -46,7 +46,7 @@ for(var i = 0; i < array.length; i++){
 }
 
 data.push({
-          name: 'datos',
+          name: 'datosx',
           type: 'bar',
           smooth: true,
           itemStyle: {
@@ -73,9 +73,9 @@ echartLine = echarts.init(document.getElementById('echart_line'));
       formatter: "{b} = {c}"
       },
       legend: {
-                x: 100,
-                y: 0,
-                data: datosx
+                //x: 100,
+                //y: 0,
+                data: ['datosx', 'datosy']
               },
       calculable: true,
       toolbox: {

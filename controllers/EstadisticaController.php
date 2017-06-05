@@ -6,6 +6,8 @@ use Yii;
 use app\models\Censo;
 use app\models\Planilla;
 use app\models\EstadoCivil;
+use app\models\TipoSalubridad;
+use app\models\FormaTenencia;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -72,9 +74,9 @@ class EstadisticaController extends Controller
     {
         $censo = $this->findModel($id);
         $resultado = array();
-        $estados = EstadoCivil::find()->all();
 
         if($tipo==1){//por estado civil
+            $estados = EstadoCivil::find()->all();
             foreach ($estados as $estado) {
                 array_push($resultado, [
                     'id' => $estado->COD_EST_CIV,
@@ -95,7 +97,56 @@ class EstadisticaController extends Controller
                     }
                 }
             }
-
+        }
+        else if($tipo==2){//forma tenencia vivienda
+            $estados = FormaTenencia::find()->all();
+            foreach ($estados as $estado) {
+                array_push($resultado, [
+                    'id' => $estado->COD_FORM_TEN,
+                    'nombre' => $estado->DESCRIPCION,
+                    'cantidad' => 0,
+                    ]
+                );
+            }
+            foreach ($censo->planillas as $planilla) {
+                if($planilla->FORMA_TENENCIA_COD_FORM_TEN > 0){
+                    for ($i = 0; $i < count($resultado); $i++) {
+                        if($planilla->fORMATENENCIACODFORMTEN->COD_FORM_TEN == $resultado[$i]['id']){
+                            $resultado[$i]['cantidad']++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else if($tipo==3){//forma tenencia vivienda
+            $estados = TipoSalubridad::find()->all();
+            foreach ($estados as $estado) {
+                $nombre = '';
+                if($estado->DESCRIPCION == "medianamente limpia" ||
+                    $estado->DESCRIPCION == "medianamente sucia"){
+                    $nombre = 'medio '.explode(' ', $estado->DESCRIPCION)[1];
+                }
+                else{
+                    $nombre = $estado->DESCRIPCION;
+                }
+                array_push($resultado, [
+                    'id' => $estado->COD_TIPO_SALUBRIDAD,
+                    'nombre' => $nombre,
+                    'cantidad' => 0,
+                    ]
+                );
+            }
+            foreach ($censo->planillas as $planilla) {
+                if($planilla->COD_SALUBRIDAD > 0){
+                    for ($i = 0; $i < count($resultado); $i++) {
+                        if($planilla->cODSALUBRIDAD->COD_TIPO_SALUBRIDAD == $resultado[$i]['id']){
+                            $resultado[$i]['cantidad']++;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
 

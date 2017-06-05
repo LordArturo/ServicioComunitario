@@ -155,6 +155,7 @@ AppAsset::register($this);
                                             </div>
                                         </a>
                                     </li>
+                                    <!--
                                     <li >
                                         <a class="btn btn-danger opcion-menu" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/reporte/">
                                             <div style="margin-top:10px;">
@@ -163,6 +164,7 @@ AppAsset::register($this);
                                             </div>
                                         </a>
                                     </li>
+                                    -->
                                     <li >
                                         <a class="btn btn-danger opcion-menu" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/estadistica/">
                                             <div style="margin-top:10px;">
